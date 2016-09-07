@@ -1,0 +1,27 @@
+# Builds
+build/
+DerivedData/
+
+# OSX
+.DS_Store
+
+# Pods
+Pods/
+OneApp.xcworkspace
+xcuserdata
+
+
+# Docs
+docs/
+*.orig
+
+# Fastlane
+fastlane/report.xml
+fastlane/test_output/*
+*.ipa
+*.dSym.zip
+.bundle
+vendor
+
+# Jenkins
+output
