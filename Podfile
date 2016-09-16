@@ -6,7 +6,13 @@ inhibit_all_warnings!
 use_frameworks!
 
 target 'status-board' do
-    pod 'Alamofire', '~> 3.0.0'
-    pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-    pod 'RealmSwift', '0.102.0'
+    pod 'Alamofire'
+    pod 'SwiftyJSON'
+    pod 'RealmSwift'
 end
+
+plugin 'cocoapods-keys', {
+  :project => "status-board",
+  :keys => [
+    "TrimetAPIKey"
+  ]}

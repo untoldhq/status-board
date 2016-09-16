@@ -7,15 +7,21 @@
 //
 
 import UIKit
+import Keys
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    static var keys = StatusboardKeys()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        API.manager.request(.Stops(parameters: nil)) { result in
+            print(result.value)
+        }
         return true
     }
 

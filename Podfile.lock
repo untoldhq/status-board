@@ -1,0 +1,30 @@
+PODS:
+  - Alamofire (3.4.1)
+  - Keys (1.0.0)
+  - Realm (1.0.1):
+    - Realm/Headers (= 1.0.1)
+  - Realm/Headers (1.0.1)
+  - RealmSwift (1.0.1):
+    - Realm (= 1.0.1)
+  - SwiftyJSON (2.3.2)
+
+DEPENDENCIES:
+  - Alamofire
+  - Keys (from `Pods/CocoaPodsKeys`)
+  - RealmSwift
+  - SwiftyJSON
+
+EXTERNAL SOURCES:
+  Keys:
+    :path: Pods/CocoaPodsKeys
+
+SPEC CHECKSUMS:
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
+  Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
+  RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+
+PODFILE CHECKSUM: d5343c994a06a3936365ff86f59574bd19d5516a
+
+COCOAPODS: 1.0.1
