@@ -18,10 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
-        API.manager.request(.Stops(parameters: nil)) { result in
-            print(result.value)
-        }
+        Data.configure()
+        Stop.fetch()
+        WatchedDestination.startWatching()
         return true
     }
 

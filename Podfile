@@ -7,8 +7,8 @@ use_frameworks!
 
 target 'status-board' do
     pod 'Alamofire'
-    pod 'SwiftyJSON'
     pod 'RealmSwift'
+    pod 'Decodable'
 end
 
 plugin 'cocoapods-keys', {

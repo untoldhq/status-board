@@ -8,13 +8,13 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 
 struct API {
     static let manager = API()
     
     enum Endpoint {
         case Stops(parameters: [String: AnyObject]?)
+        case Arrivals(parameters: [String: AnyObject]?)
         
         static let baseParameters: [String: AnyObject] = [
             "appID": API.manager.token,
@@ -26,7 +26,10 @@ struct API {
             switch self {
             case .Stops:
                 url += "V1/stops"
+            case .Arrivals:
+                url += "V1/arrivals"
             }
+            
             return NSURL(string: url)!
         }
         
@@ -39,6 +42,9 @@ struct API {
                 allParameters["feet"] = 2640
                 allParameters["ll"] = "\(Data.manager.location.latitude),\(Data.manager.location.longitude)"
                 allParameters["showRoutes"] = "true"
+            case .Arrivals(let parameters):
+                overrides = parameters
+                allParameters["streetcar"] = "true"
             }
             
             //if a parameters dictionary is present, override/set all key/value pairs
@@ -56,13 +62,12 @@ struct API {
     private let token = AppDelegate.keys.trimetAPIKey()
     
     
-    func request(endpoint: API.Endpoint, completionHandler:(Result<JSON, NSError>)->()) {
+    func request(endpoint: API.Endpoint, completionHandler:(Result<AnyObject, NSError>)->()) {
         Alamofire.request(.GET, endpoint.url(), parameters: endpoint.parameters()).responseJSON { response in
             switch response.result {
             case .Success:
                 if let value = response.result.value {
-                    let json = JSON(value)
-                    completionHandler(Result.Success(json))
+                    completionHandler(Result.Success(value))
                 }
             case .Failure(let error):
                 completionHandler(Result.Failure(error))
