@@ -31,6 +31,9 @@ class WatchedDestination: Object {
     }
     
     static func tick() {
+        guard Data.objects(self).count > 0 else {
+            return
+        }
         let stopIds = Data.objects(self).map { String($0.stop.id) }
         let stops = stopIds.joinWithSeparator(",")
         API.manager.request(.Arrivals(parameters: ["locIDs": stops])) { result in
@@ -38,7 +41,6 @@ class WatchedDestination: Object {
             case .Failure(let error):
                 print(error)
             case .Success(let value):
-                print(value)
                 parse(value)
             }
         }
@@ -63,7 +65,6 @@ class WatchedDestination: Object {
             }
         }
     }
-
     
     static func isWatched(route: Route, stop: Stop) -> Bool {
         return destinationForRoute(route, stop: stop) != nil

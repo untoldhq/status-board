@@ -15,6 +15,7 @@ struct API {
     enum Endpoint {
         case Stops(parameters: [String: AnyObject]?)
         case Arrivals(parameters: [String: AnyObject]?)
+        case Vehicles(parameters: [String: AnyObject]?)
         
         static let baseParameters: [String: AnyObject] = [
             "appID": API.manager.token,
@@ -28,6 +29,8 @@ struct API {
                 url += "V1/stops"
             case .Arrivals:
                 url += "V1/arrivals"
+            case .Vehicles:
+                url += "v2/vehicles"
             }
             
             return NSURL(string: url)!
@@ -45,6 +48,8 @@ struct API {
             case .Arrivals(let parameters):
                 overrides = parameters
                 allParameters["streetcar"] = "true"
+            case .Vehicles(let parameters):
+                overrides = parameters
             }
             
             //if a parameters dictionary is present, override/set all key/value pairs

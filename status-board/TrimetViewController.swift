@@ -50,8 +50,8 @@ class TrimetViewController: UIViewController {
     
     func updateLabelsForCell(cell: TrimetDestinationCell, indexPath: NSIndexPath) {
         let destination = dataSource[indexPath.row]
-        cell.routeLabel.text = destination.route.routeDescription
-        cell.stopLabel.text = destination.stop.stopDescription
+        cell.routeLabel.text = destination.route.name
+        cell.stopLabel.text = destination.stop.name
         if let arrival = destination.nextArrival?.timeIntervalSince1970 {
             let now = NSDate().timeIntervalSince1970
             let difference = arrival - now

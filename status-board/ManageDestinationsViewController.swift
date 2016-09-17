@@ -30,7 +30,7 @@ extension ManageDestinationsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         let route = dataSource[indexPath.row]
         let watched = WatchedDestination.destinationsForRoute(route)
-        cell.textLabel?.text = route.routeDescription
+        cell.textLabel?.text = route.name
         let plural = watched.count == 1 ? "stop" : "stops"
         cell.detailTextLabel?.text = "Watching \(watched.count) \(plural) for this route."
         cell.accessoryType = .DisclosureIndicator

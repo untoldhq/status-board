@@ -14,7 +14,7 @@ class ManageDestinationsDetailViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     var route: Route! {
         didSet {
-            title = route.routeDescription
+            title = route.name
         }
     }
     
@@ -25,7 +25,7 @@ extension ManageDestinationsDetailViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         let stop = route.stops[indexPath.row]
-        cell.textLabel?.text = stop.stopDescription
+        cell.textLabel?.text = stop.name
         cell.detailTextLabel?.text = stop.directionality
         let watchedLabel = UILabel()
         if WatchedDestination.isWatched(route, stop: stop) {

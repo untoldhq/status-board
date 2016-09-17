@@ -18,7 +18,7 @@ class Route: Object {
     }
     
     dynamic var id = 0
-    dynamic var routeDescription: String = ""
+    dynamic var name = ""
     private var routeTypeInternal = 0
     let stops = List<Stop>()
     
@@ -52,7 +52,7 @@ extension Route: Decodable {
         else {
             route.routeType = .LightRail
         }
-        route.routeDescription = try json => "desc"
+        route.name = try json => "desc"
         return route
     }
 }

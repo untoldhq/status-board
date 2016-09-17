@@ -13,11 +13,12 @@
 		180A8E051D8CB8AC0023DEF7 /* ManageDestinationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E041D8CB8AC0023DEF7 /* ManageDestinationsViewController.swift */; };
 		180A8E071D8CBFC60023DEF7 /* ManageDestinationsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E061D8CBFC60023DEF7 /* ManageDestinationsDetailViewController.swift */; };
 		180A8E091D8CD2460023DEF7 /* TrimetDestinationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E081D8CD2460023DEF7 /* TrimetDestinationCell.swift */; };
+		180A8E0E1D8DC3480023DEF7 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E0D1D8DC3480023DEF7 /* Vehicle.swift */; };
 		1837A9831D7FC062000ED091 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9821D7FC062000ED091 /* AppDelegate.swift */; };
 		1837A9851D7FC062000ED091 /* TrimetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9841D7FC062000ED091 /* TrimetViewController.swift */; };
 		1837A9881D7FC062000ED091 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1837A9861D7FC062000ED091 /* Main.storyboard */; };
 		1837A98A1D7FC062000ED091 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1837A9891D7FC062000ED091 /* Assets.xcassets */; };
-		1837A9921D7FC28C000ED091 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9911D7FC28C000ED091 /* DataManager.swift */; };
+		1837A9921D7FC28C000ED091 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9911D7FC28C000ED091 /* Data.swift */; };
 		1837A9941D7FC331000ED091 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9931D7FC330000ED091 /* API.swift */; };
 		20280155C6E5FB99AC09C786 /* Pods_status_board.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACD45E78B74B38F513D6DF1 /* Pods_status_board.framework */; };
 /* End PBXBuildFile section */
@@ -29,13 +30,14 @@
 		180A8E041D8CB8AC0023DEF7 /* ManageDestinationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageDestinationsViewController.swift; sourceTree = "<group>"; };
 		180A8E061D8CBFC60023DEF7 /* ManageDestinationsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageDestinationsDetailViewController.swift; sourceTree = "<group>"; };
 		180A8E081D8CD2460023DEF7 /* TrimetDestinationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrimetDestinationCell.swift; sourceTree = "<group>"; };
+		180A8E0D1D8DC3480023DEF7 /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		1837A97F1D7FC062000ED091 /* status-board.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "status-board.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1837A9821D7FC062000ED091 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1837A9841D7FC062000ED091 /* TrimetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimetViewController.swift; sourceTree = "<group>"; };
 		1837A9871D7FC062000ED091 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1837A9891D7FC062000ED091 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1837A98B1D7FC062000ED091 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1837A9911D7FC28C000ED091 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		1837A9911D7FC28C000ED091 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1837A9931D7FC330000ED091 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		8ACD45E78B74B38F513D6DF1 /* Pods_status_board.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_status_board.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A136CCB00FA25D75E9C4183B /* Pods-status-board.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-status-board.release.xcconfig"; path = "Pods/Target Support Files/Pods-status-board/Pods-status-board.release.xcconfig"; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				180A8DFC1D8C73A50023DEF7 /* Route.swift */,
 				180A8E011D8CB2890023DEF7 /* WatchedDestination.swift */,
 				180A8DFF1D8C75D30023DEF7 /* Stop.swift */,
+				180A8E0D1D8DC3480023DEF7 /* Vehicle.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -104,7 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				1837A9821D7FC062000ED091 /* AppDelegate.swift */,
-				1837A9911D7FC28C000ED091 /* DataManager.swift */,
+				1837A9911D7FC28C000ED091 /* Data.swift */,
 				1837A9931D7FC330000ED091 /* API.swift */,
 				180A8E0A1D8CD24B0023DEF7 /* View */,
 				180A8E031D8CB4770023DEF7 /* Controller */,
@@ -255,13 +258,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1837A9851D7FC062000ED091 /* TrimetViewController.swift in Sources */,
-				1837A9921D7FC28C000ED091 /* DataManager.swift in Sources */,
+				1837A9921D7FC28C000ED091 /* Data.swift in Sources */,
 				1837A9941D7FC331000ED091 /* API.swift in Sources */,
 				180A8DFD1D8C73A50023DEF7 /* Route.swift in Sources */,
 				1837A9831D7FC062000ED091 /* AppDelegate.swift in Sources */,
 				180A8E071D8CBFC60023DEF7 /* ManageDestinationsDetailViewController.swift in Sources */,
 				180A8E001D8C75D30023DEF7 /* Stop.swift in Sources */,
 				180A8E051D8CB8AC0023DEF7 /* ManageDestinationsViewController.swift in Sources */,
+				180A8E0E1D8DC3480023DEF7 /* Vehicle.swift in Sources */,
 				180A8E021D8CB2890023DEF7 /* WatchedDestination.swift in Sources */,
 				180A8E091D8CD2460023DEF7 /* TrimetDestinationCell.swift in Sources */,
 			);

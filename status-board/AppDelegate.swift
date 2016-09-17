@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Data.configure()
         Stop.fetch()
         WatchedDestination.startWatching()
+        Vehicle.startWatching()
         return true
     }
 

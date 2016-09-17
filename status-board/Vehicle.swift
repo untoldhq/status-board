@@ -1,31 +1,32 @@
 //
-//  Stop.swift
+//  Vehicle.swift
 //  status-board
 //
-//  Created by Sam Ingle on 9/16/16.
+//  Created by Sam Ingle on 9/17/16.
 //  Copyright © 2016 Untold. All rights reserved.
 //
 
 import Foundation
 import RealmSwift
-import CoreLocation
 import Decodable
+import CoreLocation
 
-class Stop: Object {
+class Vehicle: Object {
     private dynamic var latitudeInternal = 0.0
     private dynamic var longitudeInternal = 0.0
-    dynamic var directionality = ""
     dynamic var id = 0
     dynamic var name = ""
-    let routes = List<Route>()
+    dynamic var bearing = 0.0
     
+    static var timer: NSTimer? = nil
+
     override static func primaryKey() -> String {
         return "id"
     }
     override static func ignoredProperties() -> [String] {
         return ["location"]
     }
-
+    
     var location: CLLocationCoordinate2D {
         get {
             return CLLocationCoordinate2D(latitude: latitudeInternal, longitude: longitudeInternal)
@@ -36,8 +37,18 @@ class Stop: Object {
         }
     }
     
-    static func fetch() {
-        API.manager.request(.Stops(parameters: nil)) { result in
+    static func startWatching() {
+        timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
+        timer?.fire()
+    }
+    
+    static func tick() {
+        guard Data.objects(WatchedDestination).count > 0 else {
+            return
+        }
+        let routeIds = Data.objects(WatchedDestination.self).map { String($0.route.id) }
+        let routes = routeIds.joinWithSeparator(",")
+        API.manager.request(.Vehicles(parameters: ["routes": routes])) { result in
             switch result {
             case .Failure(let error):
                 print(error)
@@ -50,29 +61,22 @@ class Stop: Object {
     static func parse(json: AnyObject) {
         Data.write {
             do {
-                let array = try json => "resultSet" => "location"
-                try [Stop].decode(array)
+                let array = try json => "resultSet" => "vehicle"
+                try [Vehicle].decode(array)
             }
             catch let error {
                 print(error)
             }
         }
     }
-    
 }
 
-extension Stop: Decodable {
+extension Vehicle: Decodable {
     static func decode(json: AnyObject) throws -> Self {
-        let stop = Data.guaranteedObjectForPrimaryKey(self, key: try json => "locid")
-        stop.directionality = try json => "dir"
-        stop.location = CLLocationCoordinate2D(latitude: try json => "lat", longitude: try json => "lng")
-        stop.name = try json => "desc"
-        if let routesJson = try json =>? "route" {
-            let routes = try [Route].decode(routesJson)
-            for route in routes {
-                route.connectStop(stop)
-            }
-        }
-        return stop
+        let vehicle = Data.guaranteedObjectForPrimaryKey(self, key: try json => "vehicleID")
+        vehicle.location = CLLocationCoordinate2D(latitude: try json => "latitude", longitude: try json => "longitude")
+        vehicle.name = try json => "signMessage"
+        vehicle.bearing = try json => "bearing"
+        return vehicle
     }
 }
