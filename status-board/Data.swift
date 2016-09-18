@@ -8,7 +8,6 @@
 
 import Foundation
 import RealmSwift
-import CoreLocation
 
 struct Data {
     static let manager = Data()
@@ -16,7 +15,7 @@ struct Data {
     static func configure() {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
-            schemaVersion: 3,
+            schemaVersion: 6,
             migrationBlock: { migration, oldSchemaVersion in
                 // migration template
                 //                if oldSchemaVersion < 1 {
@@ -28,8 +27,6 @@ struct Data {
         Realm.Configuration.defaultConfiguration = config
 
     }
-
-    let location = CLLocationCoordinate2D(latitude: 45.5202644, longitude: -122.6744711)
     
     // swiftlint:disable force_try
     let realm = try! Realm()

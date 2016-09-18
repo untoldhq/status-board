@@ -14,6 +14,12 @@
 		180A8E071D8CBFC60023DEF7 /* ManageDestinationsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E061D8CBFC60023DEF7 /* ManageDestinationsDetailViewController.swift */; };
 		180A8E091D8CD2460023DEF7 /* TrimetDestinationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E081D8CD2460023DEF7 /* TrimetDestinationCell.swift */; };
 		180A8E0E1D8DC3480023DEF7 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E0D1D8DC3480023DEF7 /* Vehicle.swift */; };
+		180A8E101D8DCD1C0023DEF7 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E0F1D8DCD1C0023DEF7 /* RootViewController.swift */; };
+		180A8E121D8DCE6F0023DEF7 /* TrimetMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E111D8DCE6F0023DEF7 /* TrimetMapViewController.swift */; };
+		180A8E151D8DCFE50023DEF7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E141D8DCFE50023DEF7 /* Location.swift */; };
+		180A8E171D8DD5720023DEF7 /* VehicleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E161D8DD5720023DEF7 /* VehicleAnnotation.swift */; };
+		180A8E191D8DE3A40023DEF7 /* CGFloat+Trig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E181D8DE3A40023DEF7 /* CGFloat+Trig.swift */; };
+		180A8E1C1D8DEF4C0023DEF7 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E1B1D8DEF4C0023DEF7 /* Style.swift */; };
 		1837A9831D7FC062000ED091 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9821D7FC062000ED091 /* AppDelegate.swift */; };
 		1837A9851D7FC062000ED091 /* TrimetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9841D7FC062000ED091 /* TrimetViewController.swift */; };
 		1837A9881D7FC062000ED091 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1837A9861D7FC062000ED091 /* Main.storyboard */; };
@@ -31,6 +37,12 @@
 		180A8E061D8CBFC60023DEF7 /* ManageDestinationsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageDestinationsDetailViewController.swift; sourceTree = "<group>"; };
 		180A8E081D8CD2460023DEF7 /* TrimetDestinationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrimetDestinationCell.swift; sourceTree = "<group>"; };
 		180A8E0D1D8DC3480023DEF7 /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		180A8E0F1D8DCD1C0023DEF7 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		180A8E111D8DCE6F0023DEF7 /* TrimetMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrimetMapViewController.swift; sourceTree = "<group>"; };
+		180A8E141D8DCFE50023DEF7 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		180A8E161D8DD5720023DEF7 /* VehicleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleAnnotation.swift; sourceTree = "<group>"; };
+		180A8E181D8DE3A40023DEF7 /* CGFloat+Trig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Trig.swift"; sourceTree = "<group>"; };
+		180A8E1B1D8DEF4C0023DEF7 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		1837A97F1D7FC062000ED091 /* status-board.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "status-board.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1837A9821D7FC062000ED091 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1837A9841D7FC062000ED091 /* TrimetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimetViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +82,8 @@
 		180A8E031D8CB4770023DEF7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				180A8E0F1D8DCD1C0023DEF7 /* RootViewController.swift */,
+				180A8E111D8DCE6F0023DEF7 /* TrimetMapViewController.swift */,
 				1837A9841D7FC062000ED091 /* TrimetViewController.swift */,
 				180A8E041D8CB8AC0023DEF7 /* ManageDestinationsViewController.swift */,
 				180A8E061D8CBFC60023DEF7 /* ManageDestinationsDetailViewController.swift */,
@@ -80,9 +94,29 @@
 		180A8E0A1D8CD24B0023DEF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				180A8E1B1D8DEF4C0023DEF7 /* Style.swift */,
+				180A8E161D8DD5720023DEF7 /* VehicleAnnotation.swift */,
 				180A8E081D8CD2460023DEF7 /* TrimetDestinationCell.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		180A8E131D8DCFDA0023DEF7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1837A9911D7FC28C000ED091 /* Data.swift */,
+				1837A9931D7FC330000ED091 /* API.swift */,
+				180A8E141D8DCFE50023DEF7 /* Location.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		180A8E1A1D8DE3A80023DEF7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				180A8E181D8DE3A40023DEF7 /* CGFloat+Trig.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		1837A9761D7FC062000ED091 = {
@@ -107,11 +141,11 @@
 			isa = PBXGroup;
 			children = (
 				1837A9821D7FC062000ED091 /* AppDelegate.swift */,
-				1837A9911D7FC28C000ED091 /* Data.swift */,
-				1837A9931D7FC330000ED091 /* API.swift */,
+				180A8E131D8DCFDA0023DEF7 /* Services */,
 				180A8E0A1D8CD24B0023DEF7 /* View */,
 				180A8E031D8CB4770023DEF7 /* Controller */,
 				180A8DFE1D8C73AC0023DEF7 /* Model */,
+				180A8E1A1D8DE3A80023DEF7 /* Extensions */,
 				1837A9861D7FC062000ED091 /* Main.storyboard */,
 				1837A9891D7FC062000ED091 /* Assets.xcassets */,
 				1837A98B1D7FC062000ED091 /* Info.plist */,
@@ -259,14 +293,20 @@
 			files = (
 				1837A9851D7FC062000ED091 /* TrimetViewController.swift in Sources */,
 				1837A9921D7FC28C000ED091 /* Data.swift in Sources */,
+				180A8E101D8DCD1C0023DEF7 /* RootViewController.swift in Sources */,
 				1837A9941D7FC331000ED091 /* API.swift in Sources */,
 				180A8DFD1D8C73A50023DEF7 /* Route.swift in Sources */,
 				1837A9831D7FC062000ED091 /* AppDelegate.swift in Sources */,
+				180A8E151D8DCFE50023DEF7 /* Location.swift in Sources */,
+				180A8E121D8DCE6F0023DEF7 /* TrimetMapViewController.swift in Sources */,
 				180A8E071D8CBFC60023DEF7 /* ManageDestinationsDetailViewController.swift in Sources */,
+				180A8E171D8DD5720023DEF7 /* VehicleAnnotation.swift in Sources */,
 				180A8E001D8C75D30023DEF7 /* Stop.swift in Sources */,
 				180A8E051D8CB8AC0023DEF7 /* ManageDestinationsViewController.swift in Sources */,
 				180A8E0E1D8DC3480023DEF7 /* Vehicle.swift in Sources */,
 				180A8E021D8CB2890023DEF7 /* WatchedDestination.swift in Sources */,
+				180A8E1C1D8DEF4C0023DEF7 /* Style.swift in Sources */,
+				180A8E191D8DE3A40023DEF7 /* CGFloat+Trig.swift in Sources */,
 				180A8E091D8CD2460023DEF7 /* TrimetDestinationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

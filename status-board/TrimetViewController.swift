@@ -20,7 +20,6 @@ class TrimetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         notificationToken = dataSource.addNotificationBlock { [weak self] changes in
             guard let tableView = self?.tableView else {
                 return
@@ -39,7 +38,10 @@ class TrimetViewController: UIViewController {
             }
         }
     }
-    
+    override func viewDidAppear(animated: Bool) {
+        performSegueWithIdentifier("showMonitor", sender: nil)
+
+    }
     func updateRowsAtIndexPaths(paths: [NSIndexPath]) {
         for indexPath in paths {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) as? TrimetDestinationCell {

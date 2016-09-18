@@ -19,16 +19,47 @@ class Route: Object {
     
     dynamic var id = 0
     dynamic var name = ""
-    private var routeTypeInternal = 0
+    private dynamic var routeTypeInternal = 0
     let stops = List<Stop>()
     
     override static func primaryKey() -> String {
         return "id"
     }
 
-    var routeType: RouteType = .Bus {
-        didSet {
-            routeTypeInternal = routeType.rawValue
+    override static func ignoredProperties() -> [String] {
+        return ["compactLabel"]
+    }
+    
+    var routeType: RouteType {
+        get {
+            return RouteType(rawValue: routeTypeInternal)!
+        }
+        set (value) {
+            routeTypeInternal = value.rawValue
+        }
+        
+    }
+    
+    var compactLabel: String {
+        switch id {
+        case 90:
+            return "Red"
+        case 100:
+            return "Blue"
+        case 190:
+            return "Yellow"
+        case 200:
+            return "Green"
+        case 290:
+            return "Orange"
+        case 193:
+            return "NS Line"
+        case 194:
+            return "A Loop"
+        case 195:
+            return "B Loop"
+        default:
+            return String(id)
         }
     }
     
