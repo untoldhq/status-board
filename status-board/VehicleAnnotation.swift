@@ -39,8 +39,8 @@ class VehicleAnnotationView: MKAnnotationView {
         super.drawRect(rect)
         let string = labelText as NSString
         let attributes = [
-            NSForegroundColorAttributeName: Brand.color(.HighlightedText),
-            NSFontAttributeName: Brand.font(.Body)
+            NSForegroundColorAttributeName: Style.color(.HighlightedText),
+            NSFontAttributeName: Style.font(.Body)
         ]
 
         var size = string.sizeWithAttributes(attributes)
@@ -61,7 +61,7 @@ class VehicleAnnotationView: MKAnnotationView {
         CGContextSetShadow(context, CGSizeMake(0, 0), 5);
 
         CGContextAddPath(context, clipPath)
-        CGContextSetFillColorWithColor(context, Brand.color(.Primary).CGColor)
+        CGContextSetFillColorWithColor(context, Style.color(.Primary).CGColor)
         
         CGContextClosePath(context)
         CGContextFillPath(context)

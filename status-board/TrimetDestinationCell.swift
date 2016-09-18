@@ -9,10 +9,13 @@
 import Foundation
 import UIKit
 
-class TrimetDestinationCell: UITableViewCell {
+class TrimetDestinationCell: UICollectionViewCell {
     
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var routeLabel: UILabel!
     @IBOutlet var stopLabel: UILabel!
+    @IBOutlet var directionLabel: UILabel!
+    @IBOutlet var vehicleImageView: UIImageView!
+    @IBOutlet var routeNumberLabel: UILabel!
     
 }

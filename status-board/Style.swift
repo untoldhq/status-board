@@ -9,10 +9,12 @@
 import Foundation
 import UIKit
 
-struct Brand {
+struct Style {
     enum Color {
         case Primary
         case HighlightedText
+        case Signage
+        case Dark
         
         private func color() -> UIColor {
             switch self {
@@ -20,6 +22,10 @@ struct Brand {
                 return UIColor(red: 0.9215686275, green: 0.3254901961, blue: 0.4039215686, alpha: 1)
             case .HighlightedText:
                 return UIColor.whiteColor()
+            case .Signage:
+                return UIColor(red:0.29, green:0.66, blue:0.47, alpha:1.0)
+            case .Dark:
+                return UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
             }
         }
     }

@@ -20,6 +20,16 @@
 		180A8E171D8DD5720023DEF7 /* VehicleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E161D8DD5720023DEF7 /* VehicleAnnotation.swift */; };
 		180A8E191D8DE3A40023DEF7 /* CGFloat+Trig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E181D8DE3A40023DEF7 /* CGFloat+Trig.swift */; };
 		180A8E1C1D8DEF4C0023DEF7 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E1B1D8DEF4C0023DEF7 /* Style.swift */; };
+		181E25231D8F22D6005A938A /* DestinationDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E25221D8F22D6005A938A /* DestinationDecorationView.swift */; };
+		181E25251D8F2349005A938A /* DestinationLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E25241D8F2349005A938A /* DestinationLayout.swift */; };
+		181E25301D8F3653005A938A /* Overpass-Bold-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181E25261D8F2C0E005A938A /* Overpass-Bold-Italic.ttf */; };
+		181E25311D8F3653005A938A /* Overpass-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181E25271D8F2C0E005A938A /* Overpass-Bold.ttf */; };
+		181E25321D8F3653005A938A /* Overpass-ExtraLight Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181E25281D8F2C0E005A938A /* Overpass-ExtraLight Italic.ttf */; };
+		181E25331D8F3653005A938A /* Overpass-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181E25291D8F2C0E005A938A /* Overpass-ExtraLight.ttf */; };
+		181E25341D8F3653005A938A /* Overpass-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181E252A1D8F2C0E005A938A /* Overpass-Light-Italic.ttf */; };
+		181E25351D8F3653005A938A /* Overpass-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181E252B1D8F2C0E005A938A /* Overpass-Light.ttf */; };
+		181E25361D8F3653005A938A /* Overpass-Regular-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181E252C1D8F2C0E005A938A /* Overpass-Regular-Italic.ttf */; };
+		181E25371D8F3653005A938A /* Overpass-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181E252D1D8F2C0E005A938A /* Overpass-Regular.ttf */; };
 		1837A9831D7FC062000ED091 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9821D7FC062000ED091 /* AppDelegate.swift */; };
 		1837A9851D7FC062000ED091 /* TrimetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9841D7FC062000ED091 /* TrimetViewController.swift */; };
 		1837A9881D7FC062000ED091 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1837A9861D7FC062000ED091 /* Main.storyboard */; };
@@ -43,6 +53,16 @@
 		180A8E161D8DD5720023DEF7 /* VehicleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleAnnotation.swift; sourceTree = "<group>"; };
 		180A8E181D8DE3A40023DEF7 /* CGFloat+Trig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Trig.swift"; sourceTree = "<group>"; };
 		180A8E1B1D8DEF4C0023DEF7 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		181E25221D8F22D6005A938A /* DestinationDecorationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationDecorationView.swift; sourceTree = "<group>"; };
+		181E25241D8F2349005A938A /* DestinationLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationLayout.swift; sourceTree = "<group>"; };
+		181E25261D8F2C0E005A938A /* Overpass-Bold-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Overpass-Bold-Italic.ttf"; sourceTree = "<group>"; };
+		181E25271D8F2C0E005A938A /* Overpass-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Overpass-Bold.ttf"; sourceTree = "<group>"; };
+		181E25281D8F2C0E005A938A /* Overpass-ExtraLight Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Overpass-ExtraLight Italic.ttf"; sourceTree = "<group>"; };
+		181E25291D8F2C0E005A938A /* Overpass-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Overpass-ExtraLight.ttf"; sourceTree = "<group>"; };
+		181E252A1D8F2C0E005A938A /* Overpass-Light-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Overpass-Light-Italic.ttf"; sourceTree = "<group>"; };
+		181E252B1D8F2C0E005A938A /* Overpass-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Overpass-Light.ttf"; sourceTree = "<group>"; };
+		181E252C1D8F2C0E005A938A /* Overpass-Regular-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Overpass-Regular-Italic.ttf"; sourceTree = "<group>"; };
+		181E252D1D8F2C0E005A938A /* Overpass-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Overpass-Regular.ttf"; sourceTree = "<group>"; };
 		1837A97F1D7FC062000ED091 /* status-board.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "status-board.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1837A9821D7FC062000ED091 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1837A9841D7FC062000ED091 /* TrimetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimetViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +117,8 @@
 				180A8E1B1D8DEF4C0023DEF7 /* Style.swift */,
 				180A8E161D8DD5720023DEF7 /* VehicleAnnotation.swift */,
 				180A8E081D8CD2460023DEF7 /* TrimetDestinationCell.swift */,
+				181E25221D8F22D6005A938A /* DestinationDecorationView.swift */,
+				181E25241D8F2349005A938A /* DestinationLayout.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -117,6 +139,29 @@
 				180A8E181D8DE3A40023DEF7 /* CGFloat+Trig.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		181E252E1D8F2C1C005A938A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				181E252F1D8F2C28005A938A /* Fonts */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		181E252F1D8F2C28005A938A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				181E25261D8F2C0E005A938A /* Overpass-Bold-Italic.ttf */,
+				181E25271D8F2C0E005A938A /* Overpass-Bold.ttf */,
+				181E25281D8F2C0E005A938A /* Overpass-ExtraLight Italic.ttf */,
+				181E25291D8F2C0E005A938A /* Overpass-ExtraLight.ttf */,
+				181E252A1D8F2C0E005A938A /* Overpass-Light-Italic.ttf */,
+				181E252B1D8F2C0E005A938A /* Overpass-Light.ttf */,
+				181E252C1D8F2C0E005A938A /* Overpass-Regular-Italic.ttf */,
+				181E252D1D8F2C0E005A938A /* Overpass-Regular.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		1837A9761D7FC062000ED091 = {
@@ -147,6 +192,7 @@
 				180A8DFE1D8C73AC0023DEF7 /* Model */,
 				180A8E1A1D8DE3A80023DEF7 /* Extensions */,
 				1837A9861D7FC062000ED091 /* Main.storyboard */,
+				181E252E1D8F2C1C005A938A /* Supporting Files */,
 				1837A9891D7FC062000ED091 /* Assets.xcassets */,
 				1837A98B1D7FC062000ED091 /* Info.plist */,
 			);
@@ -231,6 +277,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181E25301D8F3653005A938A /* Overpass-Bold-Italic.ttf in Resources */,
+				181E25311D8F3653005A938A /* Overpass-Bold.ttf in Resources */,
+				181E25321D8F3653005A938A /* Overpass-ExtraLight Italic.ttf in Resources */,
+				181E25331D8F3653005A938A /* Overpass-ExtraLight.ttf in Resources */,
+				181E25341D8F3653005A938A /* Overpass-Light-Italic.ttf in Resources */,
+				181E25351D8F3653005A938A /* Overpass-Light.ttf in Resources */,
+				181E25361D8F3653005A938A /* Overpass-Regular-Italic.ttf in Resources */,
+				181E25371D8F3653005A938A /* Overpass-Regular.ttf in Resources */,
 				1837A98A1D7FC062000ED091 /* Assets.xcassets in Resources */,
 				1837A9881D7FC062000ED091 /* Main.storyboard in Resources */,
 			);
@@ -302,8 +356,10 @@
 				180A8E071D8CBFC60023DEF7 /* ManageDestinationsDetailViewController.swift in Sources */,
 				180A8E171D8DD5720023DEF7 /* VehicleAnnotation.swift in Sources */,
 				180A8E001D8C75D30023DEF7 /* Stop.swift in Sources */,
+				181E25231D8F22D6005A938A /* DestinationDecorationView.swift in Sources */,
 				180A8E051D8CB8AC0023DEF7 /* ManageDestinationsViewController.swift in Sources */,
 				180A8E0E1D8DC3480023DEF7 /* Vehicle.swift in Sources */,
+				181E25251D8F2349005A938A /* DestinationLayout.swift in Sources */,
 				180A8E021D8CB2890023DEF7 /* WatchedDestination.swift in Sources */,
 				180A8E1C1D8DEF4C0023DEF7 /* Style.swift in Sources */,
 				180A8E191D8DE3A40023DEF7 /* CGFloat+Trig.swift in Sources */,

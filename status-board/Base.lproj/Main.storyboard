@@ -2,9 +2,20 @@
 <document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="jSG-nO-oe5">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Overpass-Bold.ttf">
+            <string>Overpass-Bold</string>
+            <string>Overpass-Bold</string>
+        </mutableArray>
+        <mutableArray key="Overpass-Light.ttf">
+            <string>Overpass-Light</string>
+        </mutableArray>
+        <mutableArray key="Overpass-Regular.ttf">
+            <string>Overpass-Reg</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Root View Controller-->
         <scene sceneID="tfC-Ip-Ocs">
@@ -62,86 +73,90 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="540"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="gdR-pl-jFI">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zfp-du-kcN">
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="540"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="X5o-Rb-Oha" customClass="TrimetDestinationCell" customModule="status_board" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="54" width="1920" height="100"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X5o-Rb-Oha" id="7Hv-qT-zBB">
-                                            <rect key="frame" x="0.0" y="0.0" width="1904" height="100"/>
+                                <color key="backgroundColor" red="0.14204334077380953" green="0.13572149071753062" blue="0.13615196832870424" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewLayout key="collectionViewLayout" id="B8D-FF-HNK" customClass="DestinationLayout" customModule="status_board" customModuleProvider="target"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="ldI-62-0Mt" customClass="TrimetDestinationCell" customModule="status_board" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="636" height="165"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="636" height="165"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFL-nP-uuf">
-                                                    <rect key="frame" x="28" y="8" width="72" height="46"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Route" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hg-8R-cRm">
+                                                    <rect key="frame" x="140" y="20" width="85" height="39"/>
+                                                    <fontDescription key="fontDescription" name="Overpass-Bold" family="Overpass" pointSize="30"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAG-I8-K1y">
-                                                    <rect key="frame" x="28" y="46" width="128" height="46"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtd-df-Jba">
+                                                    <rect key="frame" x="140" y="63" width="64" height="39"/>
+                                                    <fontDescription key="fontDescription" name="Overpass-Reg" family="Overpass" pointSize="30"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arrives" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVs-lg-N5h">
-                                                    <rect key="frame" x="1774" y="0.0" width="78" height="30"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pO-iJ-1QM">
+                                                    <rect key="frame" x="509" y="63" width="71" height="39"/>
+                                                    <fontDescription key="fontDescription" name="Overpass-Bold" family="Overpass" pointSize="30"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cyb-Rw-pj6">
-                                                    <rect key="frame" x="1786" y="46" width="55" height="46"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bus" translatesAutoresizingMaskIntoConstraints="NO" id="7D8-1p-crL">
+                                                    <rect key="frame" x="0.0" y="23" width="120" height="120"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="120" id="A5o-mD-jGD"/>
+                                                        <constraint firstAttribute="height" constant="120" id="InL-Rf-sMm"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Direction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWO-iU-4gd">
+                                                    <rect key="frame" x="140" y="107" width="121" height="38"/>
+                                                    <fontDescription key="fontDescription" name="Overpass-Light" family="Overpass" pointSize="30"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="CAG-I8-K1y" secondAttribute="bottom" id="1LL-7E-2GU"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="bVs-lg-N5h" secondAttribute="trailing" constant="60" id="91Y-gN-qyZ"/>
-                                                <constraint firstItem="Cyb-Rw-pj6" firstAttribute="centerX" secondItem="bVs-lg-N5h" secondAttribute="centerX" id="HBv-tc-Y2d"/>
-                                                <constraint firstItem="Cyb-Rw-pj6" firstAttribute="centerY" secondItem="CAG-I8-K1y" secondAttribute="centerY" id="Mie-GV-17n"/>
-                                                <constraint firstAttribute="topMargin" secondItem="hFL-nP-uuf" secondAttribute="top" id="Pea-hC-Iqo"/>
-                                                <constraint firstAttribute="leadingMargin" secondItem="CAG-I8-K1y" secondAttribute="leading" constant="-20" id="aR9-gp-mfo"/>
-                                                <constraint firstAttribute="leadingMargin" secondItem="hFL-nP-uuf" secondAttribute="leading" constant="-20" id="gMj-C7-bZ7"/>
-                                                <constraint firstItem="bVs-lg-N5h" firstAttribute="top" secondItem="7Hv-qT-zBB" secondAttribute="topMargin" constant="-8" id="p5f-Hh-VYk"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="Xtd-df-Jba" firstAttribute="centerY" secondItem="ldI-62-0Mt" secondAttribute="centerY" id="7Co-Ji-VXS"/>
+                                            <constraint firstItem="4hg-8R-cRm" firstAttribute="leading" secondItem="7D8-1p-crL" secondAttribute="trailing" constant="20" id="PYp-6B-KjK"/>
+                                            <constraint firstItem="0pO-iJ-1QM" firstAttribute="centerY" secondItem="ldI-62-0Mt" secondAttribute="centerY" id="UGt-xv-gzo"/>
+                                            <constraint firstAttribute="bottom" secondItem="AWO-iU-4gd" secondAttribute="bottom" constant="20" id="bLU-Yw-7Oz"/>
+                                            <constraint firstItem="Xtd-df-Jba" firstAttribute="leading" secondItem="7D8-1p-crL" secondAttribute="trailing" constant="20" id="fTZ-Tf-PHo"/>
+                                            <constraint firstItem="7D8-1p-crL" firstAttribute="leading" secondItem="ldI-62-0Mt" secondAttribute="leading" id="fa8-kJ-Znu"/>
+                                            <constraint firstAttribute="trailing" secondItem="0pO-iJ-1QM" secondAttribute="trailing" constant="56" id="hhC-P6-xfX"/>
+                                            <constraint firstItem="4hg-8R-cRm" firstAttribute="top" secondItem="ldI-62-0Mt" secondAttribute="top" constant="20" id="rRi-jR-4hy"/>
+                                            <constraint firstItem="AWO-iU-4gd" firstAttribute="leading" secondItem="7D8-1p-crL" secondAttribute="trailing" constant="20" id="sKk-lg-m9W"/>
+                                            <constraint firstItem="7D8-1p-crL" firstAttribute="centerY" secondItem="ldI-62-0Mt" secondAttribute="centerY" id="zDU-Pf-kI6"/>
+                                        </constraints>
+                                        <size key="customSize" width="636" height="165"/>
                                         <connections>
-                                            <outlet property="routeLabel" destination="hFL-nP-uuf" id="Bva-B4-4Id"/>
-                                            <outlet property="stopLabel" destination="CAG-I8-K1y" id="JZb-sw-DOp"/>
-                                            <outlet property="timeLabel" destination="Cyb-Rw-pj6" id="ZAe-1G-PN2"/>
+                                            <outlet property="directionLabel" destination="AWO-iU-4gd" id="J1j-qL-omM"/>
+                                            <outlet property="routeLabel" destination="4hg-8R-cRm" id="dtd-cB-8fr"/>
+                                            <outlet property="stopLabel" destination="Xtd-df-Jba" id="HNk-Gp-9Ve"/>
+                                            <outlet property="timeLabel" destination="0pO-iJ-1QM" id="L4y-Th-GIh"/>
+                                            <outlet property="vehicleImageView" destination="7D8-1p-crL" id="uEc-Sg-POQ"/>
                                         </connections>
-                                    </tableViewCell>
-                                </prototypes>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="5LK-VR-QHR"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Rxs-p8-V2i"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="3uu-Ks-9Sm"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="NCb-dm-Huh"/>
                                 </connections>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwt-HH-rV3">
-                                <rect key="frame" x="1687" y="434" width="213" height="86"/>
-                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Monitor"/>
-                                <connections>
-                                    <segue destination="uOq-7l-Jrp" kind="presentation" identifier="showMonitor" modalPresentationStyle="pageSheet" id="4Ny-v2-aw9"/>
-                                </connections>
-                            </button>
+                            </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gdR-pl-jFI" secondAttribute="bottom" id="IV5-Kt-JDa"/>
-                            <constraint firstAttribute="trailing" secondItem="gdR-pl-jFI" secondAttribute="trailing" id="KfK-kp-STK"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uwt-HH-rV3" secondAttribute="bottom" constant="20" id="cnK-j3-VFx"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uwt-HH-rV3" secondAttribute="trailing" id="oAh-mJ-g4N"/>
-                            <constraint firstItem="gdR-pl-jFI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="sSh-ED-C5u"/>
-                            <constraint firstItem="gdR-pl-jFI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="wyX-U9-jRz"/>
+                            <constraint firstItem="zfp-du-kcN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Ggj-Od-zW6"/>
+                            <constraint firstAttribute="trailing" secondItem="zfp-du-kcN" secondAttribute="trailing" id="Ki9-b5-Tdh"/>
+                            <constraint firstItem="zfp-du-kcN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gb9-xC-Rzk"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zfp-du-kcN" secondAttribute="bottom" id="sk4-up-aEp"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="gdR-pl-jFI" id="Diq-29-zTS"/>
+                        <outlet property="collectionView" destination="zfp-du-kcN" id="mvJ-4z-6ut"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -222,7 +237,7 @@
                                                     <rect key="frame" x="20" y="4" width="72" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="evp-QA-jof">
@@ -286,7 +301,7 @@
                                                     <rect key="frame" x="20" y="4" width="72" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fMX-iU-K3L">
@@ -322,4 +337,7 @@
             <point key="canvasLocation" x="4327" y="429"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bus" width="200" height="200"/>
+    </resources>
 </document>

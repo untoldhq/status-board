@@ -11,7 +11,7 @@ import RealmSwift
 
 class TrimetViewController: UIViewController {
 
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var collectionView: UICollectionView!
 
     lazy var dataSource: Results<WatchedDestination>! = {
         return Data.objects(WatchedDestination.self)
@@ -20,38 +20,52 @@ class TrimetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let layout = collectionView.collectionViewLayout as! DestinationLayout
+        layout.registerClass(DestinationDecorationView.self, forDecorationViewOfKind: "signage")
+        
         notificationToken = dataSource.addNotificationBlock { [weak self] changes in
-            guard let tableView = self?.tableView else {
+            guard let collectionView = self?.collectionView else {
                 return
             }
             switch changes {
             case .Initial:
-                tableView.reloadData()
+                collectionView.reloadData()
             case .Update(_, let deletions, let insertions, let modifications):
-                tableView.beginUpdates()
-                tableView.insertRowsAtIndexPaths(insertions.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
-                tableView.deleteRowsAtIndexPaths(deletions.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
-                self?.updateRowsAtIndexPaths(modifications.map { NSIndexPath(forRow: $0, inSection: 0) })
-                tableView.endUpdates()
+                collectionView.performBatchUpdates({
+                    if let strongSelf = self {
+                        collectionView.insertItemsAtIndexPaths(insertions.map(strongSelf.transformIndexPath))
+                        collectionView.deleteItemsAtIndexPaths(deletions.map(strongSelf.transformIndexPath))
+                    }
+                }, completion: nil)
+                if let strongSelf = self {
+                    self?.updateRowsAtIndexPaths(modifications.map(strongSelf.transformIndexPath))
+                }
             case .Error(let error):
                 print(error)
             }
         }
     }
-    override func viewDidAppear(animated: Bool) {
-        performSegueWithIdentifier("showMonitor", sender: nil)
 
+    func transformIndexPath(index: Int) -> NSIndexPath {
+        let item = index % maxItemsPerSection()
+        let section = index / maxItemsPerSection()
+        return NSIndexPath(forItem: item, inSection: section)
+    }
+    
+    func reverseTransformIndexPath(indexPath: NSIndexPath) -> Int {
+        return indexPath.section * maxItemsPerSection() + indexPath.row
     }
     func updateRowsAtIndexPaths(paths: [NSIndexPath]) {
         for indexPath in paths {
-            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? TrimetDestinationCell {
+            if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? TrimetDestinationCell {
                 updateLabelsForCell(cell, indexPath: indexPath)
             }
         }
     }
     
     func updateLabelsForCell(cell: TrimetDestinationCell, indexPath: NSIndexPath) {
-        let destination = dataSource[indexPath.row]
+        let destination = dataSource[reverseTransformIndexPath(indexPath)]
         cell.routeLabel.text = destination.route.name
         cell.stopLabel.text = destination.stop.name
         if let arrival = destination.nextArrival?.timeIntervalSince1970 {
@@ -63,6 +77,14 @@ class TrimetViewController: UIViewController {
             else {
                 cell.timeLabel.text = "Unknown"
             }
+            cell.directionLabel.text = destination.stop.directionality
+            cell.vehicleImageView.image = destination.route.routeType == .Bus ? UIImage(named: "bus") : UIImage(named: "rail")
+//            if destination.route.routeType == .Bus {
+//                cell.routeNumberLabel.text = destination.route.compactLabel
+//            }
+//            else {
+//                cell.routeNumberLabel.text = ""
+//            }
         }
         else {
             cell.timeLabel.text = "Unknown"
@@ -72,16 +94,30 @@ class TrimetViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func maxItemsPerSection() -> Int {
+        let layout = collectionView.collectionViewLayout as! DestinationLayout
+        return layout.maxItemsPerSection(collectionView)
+    }
 
 }
 
-extension TrimetViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! TrimetDestinationCell
+extension TrimetViewController: UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TrimetDestinationCell
         updateLabelsForCell(cell, indexPath: indexPath)
         return cell
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        maxItemsPerSection()
+        let sections = numberOfSectionsInCollectionView(collectionView)
+        if section != sections - 1 {
+            return maxItemsPerSection()
+        }
+        let fullSections = dataSource.count / maxItemsPerSection()
+        return dataSource.count - fullSections * maxItemsPerSection()
+    }
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return Int(ceil(CGFloat(dataSource.count) / CGFloat(maxItemsPerSection())))
     }
 }
