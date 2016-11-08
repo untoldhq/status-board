@@ -13,42 +13,42 @@ struct API {
     static let manager = API()
     
     enum Endpoint {
-        case Stops(parameters: [String: AnyObject]?)
-        case Arrivals(parameters: [String: AnyObject]?)
-        case Vehicles(parameters: [String: AnyObject]?)
+        case stops(parameters: [String: Any]?)
+        case arrivals(parameters: [String: Any]?)
+        case vehicles(parameters: [String: Any]?)
         
-        static let baseParameters: [String: AnyObject] = [
+        static let baseParameters: [String: Any] = [
             "appID": API.manager.token,
             "json": "true"
         ]
         
-        func url() -> NSURL {
+        func url() -> URL {
             var url = API.manager.base
             switch self {
-            case .Stops:
+            case .stops:
                 url += "V1/stops"
-            case .Arrivals:
+            case .arrivals:
                 url += "V1/arrivals"
-            case .Vehicles:
+            case .vehicles:
                 url += "v2/vehicles"
             }
             
-            return NSURL(string: url)!
+            return URL(string: url)!
         }
         
-        func parameters() -> [String: AnyObject] {
+        func parameters() -> [String: Any] {
             var allParameters = Endpoint.baseParameters
-            var overrides: [String: AnyObject]? = nil
+            var overrides: [String: Any]? = nil
             switch self {
-            case .Stops(let parameters):
+            case .stops(let parameters):
                 overrides = parameters
-                allParameters["feet"] = 2640
-                allParameters["ll"] = "\(Location.manager.location.latitude),\(Location.manager.location.longitude)"
-                allParameters["showRoutes"] = "true"
-            case .Arrivals(let parameters):
+                allParameters["feet"] = 2640 as AnyObject?
+                allParameters["ll"] = "\(Location.manager.location.latitude),\(Location.manager.location.longitude)" as AnyObject?
+                allParameters["showRoutes"] = "true" as AnyObject?
+            case .arrivals(let parameters):
                 overrides = parameters
-                allParameters["streetcar"] = "true"
-            case .Vehicles(let parameters):
+                allParameters["streetcar"] = "true" as AnyObject?
+            case .vehicles(let parameters):
                 overrides = parameters
             }
             
@@ -64,18 +64,18 @@ struct API {
     }
     
     let base = "https://developer.trimet.org/ws/"
-    private let token = AppDelegate.keys.trimetAPIKey()
+    fileprivate let token = AppDelegate.keys.trimetAPIKey()!
     
     
-    func request(endpoint: API.Endpoint, completionHandler:(Result<AnyObject, NSError>)->()) {
-        Alamofire.request(.GET, endpoint.url(), parameters: endpoint.parameters()).responseJSON { response in
+    func request(_ endpoint: API.Endpoint, completionHandler:@escaping (Result<Any>)->()) {
+        Alamofire.request(endpoint.url(), parameters: endpoint.parameters()).responseJSON { response in
             switch response.result {
-            case .Success:
+            case .success:
                 if let value = response.result.value {
-                    completionHandler(Result.Success(value))
+                    completionHandler(Result.success(value))
                 }
-            case .Failure(let error):
-                completionHandler(Result.Failure(error))
+            case .failure(let error):
+                completionHandler(Result.failure(error))
             }
         }
     }

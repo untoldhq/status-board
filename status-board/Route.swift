@@ -13,13 +13,13 @@ import Decodable
 class Route: Object {
     
     enum RouteType: Int {
-        case Bus
-        case LightRail
+        case bus
+        case lightRail
     }
     
     dynamic var id = 0
     dynamic var name = ""
-    private dynamic var routeTypeInternal = 0
+    fileprivate dynamic var routeTypeInternal = 0
     let stops = List<Stop>()
     
     override static func primaryKey() -> String {
@@ -63,7 +63,7 @@ class Route: Object {
         }
     }
     
-    func connectStop(stop: Stop) {
+    func connectStop(_ stop: Stop) {
         if !stops.contains(stop) {
             stops.append(stop)
         }
@@ -74,14 +74,14 @@ class Route: Object {
 }
 
 extension Route: Decodable {
-    static func decode(json: AnyObject) throws -> Self {
-        let route = Data.guaranteedObjectForPrimaryKey(self, key: try json => "route")
+    static func decode(_ json: Any) throws -> Self {
+        let route = Data.guaranteedObject(ofType: self, forPrimaryKey: try json => "route")
         let routeTypeCode: String = try json => "type"
         if routeTypeCode == "B" {
-            route.routeType = .Bus
+            route.routeType = .bus
         }
         else {
-            route.routeType = .LightRail
+            route.routeType = .lightRail
         }
         route.name = try json => "desc"
         return route

@@ -16,7 +16,7 @@ class TrimetMapViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
     
     lazy var unfilteredDataSource: Results<Vehicle>! = {
-        return Data.objects(Vehicle.self)
+        return Data.objects(ofType: Vehicle.self)
     }()
     var notificationToken: NotificationToken? = nil
 
@@ -31,13 +31,13 @@ class TrimetMapViewController: UIViewController {
                 return
             }
             switch changes {
-            case .Initial:
+            case .initial:
                 break
 //                tableView.reloadData()
-            case .Update(_, let deletions, let insertions, let modifications):
+            case .update(_, _, _, _):
                 self?.updateAnnotations()
                 break
-            case .Error(let error):
+            case .error(let error):
                 print(error)
             }
         }
@@ -46,7 +46,7 @@ class TrimetMapViewController: UIViewController {
     
     func dataSource() -> [Vehicle] {
         return unfilteredDataSource.filter { vehicle -> Bool in
-            Location.manager.region.containsCoordinate(vehicle.location)
+            Location.manager.region.contains(vehicle.location)
         }
     }
     
@@ -60,15 +60,15 @@ class TrimetMapViewController: UIViewController {
                 annotation = VehicleAnnotation(id: vehicle.id)
                 mapView.addAnnotation(annotation)
             }
-            UIView.animateWithDuration(Vehicle.pollingInterval) {
+            UIView.animate(withDuration: Vehicle.pollingInterval) {
                 annotation.coordinate = vehicle.location
-                let annotationView = self.mapView.viewForAnnotation(annotation)
-                annotationView?.transform = CGAffineTransformMakeRotation(vehicle.bearing.toRadians() - (CGFloat(M_PI) / 2))
+                let annotationView = self.mapView.view(for: annotation)
+                annotationView?.transform = CGAffineTransform(rotationAngle: vehicle.bearing.toRadians() - (CGFloat(M_PI) / 2))
             }
         }
     }
     
-    func annotationForVehicle(vehicle: Vehicle) -> VehicleAnnotation? {
+    func annotationForVehicle(_ vehicle: Vehicle) -> VehicleAnnotation? {
         let vehicleAnnotations = mapView.annotations.flatMap { $0 as? VehicleAnnotation }
         return vehicleAnnotations.filter { $0.vehicleId == vehicle.id }.first
     }
@@ -76,17 +76,17 @@ class TrimetMapViewController: UIViewController {
 }
 
 extension TrimetMapViewController: MKMapViewDelegate {
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         switch annotation {
         case let vehicleAnnotation as VehicleAnnotation:
             let annotationView: VehicleAnnotationView
-            if let existing = mapView.dequeueReusableAnnotationViewWithIdentifier("annotation") as? VehicleAnnotationView {
+            if let existing = mapView.dequeueReusableAnnotationView(withIdentifier: "annotation") as? VehicleAnnotationView {
                 annotationView = existing
             }
             else {
                 annotationView = VehicleAnnotationView(annotation: vehicleAnnotation, reuseIdentifier: "annotation")
             }
-            if let vehicle = Data.objectForPrimaryKey(Vehicle.self, key: vehicleAnnotation.vehicleId) {
+            if let vehicle = Data.object(ofType: Vehicle.self, forPrimaryKey: vehicleAnnotation.vehicleId) {
                 if let route = vehicle.route {
                     annotationView.labelText = route.compactLabel
                     annotationView.routeType = route.routeType

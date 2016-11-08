@@ -12,37 +12,37 @@ import UIKit
 class ManageDestinationsViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
-    let dataSource = Data.objects(Route.self).sorted("id")
+    let dataSource = Data.objects(ofType: Route.self).sorted(byProperty: "id")
    
     override func viewDidLoad() {
         title = "Nearby Routes"
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let controller = segue.destinationViewController as? ManageDestinationsDetailViewController, route = sender as? Route {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? ManageDestinationsDetailViewController, let route = sender as? Route {
             controller.route = route
         }
     }
 }
 
 extension ManageDestinationsViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let route = dataSource[indexPath.row]
         let watched = WatchedDestination.destinationsForRoute(route)
         cell.textLabel?.text = route.name
         let plural = watched.count == 1 ? "stop" : "stops"
         cell.detailTextLabel?.text = "Watching \(watched.count) \(plural) for this route."
-        cell.accessoryType = .DisclosureIndicator
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
 }
 
 extension ManageDestinationsViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("showDetail", sender: dataSource[indexPath.row])
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showDetail", sender: dataSource[indexPath.row])
     }
 }

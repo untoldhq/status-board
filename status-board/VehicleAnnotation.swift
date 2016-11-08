@@ -23,27 +23,23 @@ class VehicleAnnotationView: MKAnnotationView {
 
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        opaque = false
+        isOpaque = false
         frame = CGRect(x: 0, y: 0, width: 100, height: 40)
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         let string = labelText as NSString
         let attributes = [
-            NSForegroundColorAttributeName: Style.color(.HighlightedText),
-            NSFontAttributeName: Style.font(.Body)
+            NSForegroundColorAttributeName: Style.color(.highlightedText),
+            NSFontAttributeName: Style.font(.body)
         ]
 
-        var size = string.sizeWithAttributes(attributes)
+        var size = string.size(attributes: attributes)
         size = CGSize(width: size.width + 4, height: size.height + 4)
         let rect = CGRect(
         x: (bounds.width - size.width) / 2,
@@ -53,19 +49,19 @@ class VehicleAnnotationView: MKAnnotationView {
         )
 
 
-        let context: CGContextRef = UIGraphicsGetCurrentContext()!
+        let context: CGContext = UIGraphicsGetCurrentContext()!
         
-        let length: CGFloat = routeType == .Bus ? 40 : 90
+        let length: CGFloat = routeType == .bus ? 40 : 90
         
-        let clipPath: CGPathRef = UIBezierPath(roundedRect: CGRect(x: (bounds.width - length) / 2, y: rect.origin.y, width: length, height: rect.size.height), cornerRadius: 6.0).CGPath
-        CGContextSetShadow(context, CGSizeMake(0, 0), 5);
+        let clipPath: CGPath = UIBezierPath(roundedRect: CGRect(x: (bounds.width - length) / 2, y: rect.origin.y, width: length, height: rect.size.height), cornerRadius: 6.0).cgPath
+        context.setShadow(offset: CGSize(width: 0, height: 0), blur: 5);
 
-        CGContextAddPath(context, clipPath)
-        CGContextSetFillColorWithColor(context, Style.color(.Primary).CGColor)
+        context.addPath(clipPath)
+        context.setFillColor(Style.color(.primary).cgColor)
         
-        CGContextClosePath(context)
-        CGContextFillPath(context)
-        string.drawInRect(rect, withAttributes: attributes)
+        context.closePath()
+        context.fillPath()
+        string.draw(in: rect, withAttributes: attributes)
     }
 
 }

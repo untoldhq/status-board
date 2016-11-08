@@ -22,8 +22,8 @@ class ManageDestinationsDetailViewController: UIViewController {
 
 extension ManageDestinationsDetailViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let stop = route.stops[indexPath.row]
         cell.textLabel?.text = stop.name
         cell.detailTextLabel?.text = stop.directionality
@@ -38,13 +38,13 @@ extension ManageDestinationsDetailViewController: UITableViewDataSource {
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return route.stops.count
     }
 }
 
 extension ManageDestinationsDetailViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let stop = route.stops[indexPath.row]
         if WatchedDestination.isWatched(route, stop: stop) {
             WatchedDestination.unWatch(route, stop: stop)

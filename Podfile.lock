@@ -1,12 +1,12 @@
 PODS:
-  - Alamofire (3.4.1)
-  - Decodable (0.4.3)
+  - Alamofire (4.0.1)
+  - Decodable (0.5)
   - Keys (1.0.0)
-  - Realm (1.0.1):
-    - Realm/Headers (= 1.0.1)
-  - Realm/Headers (1.0.1)
-  - RealmSwift (1.0.1):
-    - Realm (= 1.0.1)
+  - Realm (2.0.2):
+    - Realm/Headers (= 2.0.2)
+  - Realm/Headers (2.0.2)
+  - RealmSwift (2.0.2):
+    - Realm (= 2.0.2)
 
 DEPENDENCIES:
   - Alamofire
@@ -19,12 +19,12 @@ EXTERNAL SOURCES:
     :path: Pods/CocoaPodsKeys
 
 SPEC CHECKSUMS:
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  Decodable: ab6c7d02a5df949d3ab16b2696528a3241e37c76
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  Decodable: 7c90acc68d357b71d0d6efc120faf9c53c644b7e
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
-  RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
+  Realm: 0f5a194af0b7e6158b83db41b4ee1a00be7ddf1a
+  RealmSwift: 0eb5070d851cba7c66e841ca756d83609dc78bc8
 
-PODFILE CHECKSUM: 44aa3fd41e0b742f3d5b3fe3a98c4310d55b317e
+PODFILE CHECKSUM: 366abc2ed11da5fd396a871e2fa5436e3038ae7e
 
 COCOAPODS: 1.0.1

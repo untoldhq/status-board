@@ -10,28 +10,28 @@ import UIKit
 
 class DestinationLayout: UICollectionViewFlowLayout {
     
-    let sectionWidth = UIScreen.mainScreen().bounds.size.width / 2
+    let sectionWidth = UIScreen.main.bounds.size.width / 2
 
-    override func layoutAttributesForDecorationViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
-        let layoutAttributes = UICollectionViewLayoutAttributes(forDecorationViewOfKind: elementKind, withIndexPath: indexPath)
-        layoutAttributes.frame = CGRect(x: CGFloat(indexPath.section) * sectionWidth, y: 0, width: sectionWidth, height: collectionViewContentSize().height)
+    override func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let layoutAttributes = UICollectionViewLayoutAttributes(forDecorationViewOfKind: elementKind, with: indexPath)
+        layoutAttributes.frame = CGRect(x: CGFloat(indexPath.section) * sectionWidth, y: 0, width: sectionWidth, height: collectionViewContentSize.height)
         layoutAttributes.zIndex = -1
         return layoutAttributes
     }
     
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let collectionView = collectionView else {
             return nil
         }
         var attributes = [UICollectionViewLayoutAttributes]()
-        for i in 0..<collectionView.numberOfSections() {
-            if let attribute = layoutAttributesForDecorationViewOfKind("signage", atIndexPath: NSIndexPath(forItem: 0, inSection: i)) {
+        for i in 0..<collectionView.numberOfSections {
+            if let attribute = layoutAttributesForDecorationView(ofKind: "signage", at: IndexPath(item: 0, section: i)) {
                 attributes.append(attribute)
             }
         }
-        for i in 0..<collectionView.numberOfSections() {
-            for j in 0..<collectionView.numberOfItemsInSection(i) {
-                if let attribute = layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: j, inSection: i)) {
+        for i in 0..<collectionView.numberOfSections {
+            for j in 0..<collectionView.numberOfItems(inSection: i) {
+                if let attribute = layoutAttributesForItem(at: IndexPath(item: j, section: i)) {
                     attributes.append(attribute)
                 }
             }
@@ -39,11 +39,11 @@ class DestinationLayout: UICollectionViewFlowLayout {
         return attributes
     }
     
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         guard let collectionView = collectionView else {
             return nil
         }
-        let attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
+        let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
         let rect = CGRect(
             x: CGFloat(indexPath.section) * sectionWidth,
             y: 0,
@@ -60,15 +60,15 @@ class DestinationLayout: UICollectionViewFlowLayout {
         return attributes
     }
     
-    func maxItemsPerSection(collectionView: UICollectionView) -> Int {
-        let itemHeight = UIScreen.mainScreen().bounds.size.height / 6
+    func maxItemsPerSection(_ collectionView: UICollectionView) -> Int {
+        let itemHeight = UIScreen.main.bounds.size.height / 6
         return Int(collectionView.bounds.size.height / itemHeight)
     }
     
-    override func collectionViewContentSize() -> CGSize {
+    override var collectionViewContentSize : CGSize {
         guard let collectionView = collectionView else {
             return CGSize.zero
         }
-        return CGSize(width: sectionWidth * CGFloat(collectionView.numberOfSections()), height: collectionView.bounds.height)
+        return CGSize(width: sectionWidth * CGFloat(collectionView.numberOfSections), height: collectionView.bounds.height)
     }
 }

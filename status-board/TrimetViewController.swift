@@ -14,7 +14,7 @@ class TrimetViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
 
     lazy var dataSource: Results<WatchedDestination>! = {
-        return Data.objects(WatchedDestination.self)
+        return Data.objects(ofType: WatchedDestination.self)
     }()
     var notificationToken: NotificationToken? = nil
     
@@ -22,54 +22,58 @@ class TrimetViewController: UIViewController {
         super.viewDidLoad()
         
         let layout = collectionView.collectionViewLayout as! DestinationLayout
-        layout.registerClass(DestinationDecorationView.self, forDecorationViewOfKind: "signage")
+        layout.register(DestinationDecorationView.self, forDecorationViewOfKind: "signage")
         
         notificationToken = dataSource.addNotificationBlock { [weak self] changes in
             guard let collectionView = self?.collectionView else {
                 return
             }
             switch changes {
-            case .Initial:
+            case .initial:
                 collectionView.reloadData()
-            case .Update(_, let deletions, let insertions, let modifications):
+            case .update(_, let deletions, let insertions, let modifications):
                 collectionView.performBatchUpdates({
                     if let strongSelf = self {
-                        collectionView.insertItemsAtIndexPaths(insertions.map(strongSelf.transformIndexPath))
-                        collectionView.deleteItemsAtIndexPaths(deletions.map(strongSelf.transformIndexPath))
+                        collectionView.insertItems(at: insertions.map(strongSelf.transformIndexPath))
+                        collectionView.deleteItems(at: deletions.map(strongSelf.transformIndexPath))
                     }
                 }, completion: nil)
                 if let strongSelf = self {
                     self?.updateRowsAtIndexPaths(modifications.map(strongSelf.transformIndexPath))
                 }
-            case .Error(let error):
+            case .error(let error):
                 print(error)
             }
         }
     }
 
-    func transformIndexPath(index: Int) -> NSIndexPath {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        performSegue(withIdentifier: "showMonitor", sender: nil)
+    }
+    func transformIndexPath(_ index: Int) -> IndexPath {
         let item = index % maxItemsPerSection()
         let section = index / maxItemsPerSection()
-        return NSIndexPath(forItem: item, inSection: section)
+        return IndexPath(item: item, section: section)
     }
     
-    func reverseTransformIndexPath(indexPath: NSIndexPath) -> Int {
+    func reverseTransformIndexPath(_ indexPath: IndexPath) -> Int {
         return indexPath.section * maxItemsPerSection() + indexPath.row
     }
-    func updateRowsAtIndexPaths(paths: [NSIndexPath]) {
+    func updateRowsAtIndexPaths(_ paths: [IndexPath]) {
         for indexPath in paths {
-            if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? TrimetDestinationCell {
+            if let cell = collectionView.cellForItem(at: indexPath) as? TrimetDestinationCell {
                 updateLabelsForCell(cell, indexPath: indexPath)
             }
         }
     }
     
-    func updateLabelsForCell(cell: TrimetDestinationCell, indexPath: NSIndexPath) {
+    func updateLabelsForCell(_ cell: TrimetDestinationCell, indexPath: IndexPath) {
         let destination = dataSource[reverseTransformIndexPath(indexPath)]
         cell.routeLabel.text = destination.route.name
         cell.stopLabel.text = destination.stop.name
         if let arrival = destination.nextArrival?.timeIntervalSince1970 {
-            let now = NSDate().timeIntervalSince1970
+            let now = Date().timeIntervalSince1970
             let difference = arrival - now
             if difference > 0 {
                 cell.timeLabel.text = "\(Int(difference / 60))m"
@@ -78,7 +82,7 @@ class TrimetViewController: UIViewController {
                 cell.timeLabel.text = "Unknown"
             }
             cell.directionLabel.text = destination.stop.directionality
-            cell.vehicleImageView.image = destination.route.routeType == .Bus ? UIImage(named: "bus") : UIImage(named: "rail")
+            cell.vehicleImageView.image = destination.route.routeType == .bus ? UIImage(named: "bus") : UIImage(named: "rail")
 //            if destination.route.routeType == .Bus {
 //                cell.routeNumberLabel.text = destination.route.compactLabel
 //            }
@@ -103,21 +107,21 @@ class TrimetViewController: UIViewController {
 }
 
 extension TrimetViewController: UICollectionViewDataSource {
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TrimetDestinationCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TrimetDestinationCell
         updateLabelsForCell(cell, indexPath: indexPath)
         return cell
     }
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        maxItemsPerSection()
-        let sections = numberOfSectionsInCollectionView(collectionView)
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        _ = maxItemsPerSection()
+        let sections = numberOfSections(in: collectionView)
         if section != sections - 1 {
             return maxItemsPerSection()
         }
         let fullSections = dataSource.count / maxItemsPerSection()
         return dataSource.count - fullSections * maxItemsPerSection()
     }
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return Int(ceil(CGFloat(dataSource.count) / CGFloat(maxItemsPerSection())))
     }
 }

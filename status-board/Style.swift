@@ -11,40 +11,40 @@ import UIKit
 
 struct Style {
     enum Color {
-        case Primary
-        case HighlightedText
-        case Signage
-        case Dark
+        case primary
+        case highlightedText
+        case signage
+        case dark
         
-        private func color() -> UIColor {
+        fileprivate func color() -> UIColor {
             switch self {
-            case .Primary:
+            case .primary:
                 return UIColor(red: 0.9215686275, green: 0.3254901961, blue: 0.4039215686, alpha: 1)
-            case .HighlightedText:
-                return UIColor.whiteColor()
-            case .Signage:
+            case .highlightedText:
+                return UIColor.white
+            case .signage:
                 return UIColor(red:0.29, green:0.66, blue:0.47, alpha:1.0)
-            case .Dark:
+            case .dark:
                 return UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
             }
         }
     }
     
     enum Font {
-        case Body
+        case body
         
-        private func font() -> UIFont {
+        fileprivate func font() -> UIFont {
             switch self {
-            case .Body:
-                return UIFont.systemFontOfSize(20)
+            case .body:
+                return UIFont.systemFont(ofSize: 20)
             }
         }
     }
     
-    static func color(color: Color) -> UIColor {
+    static func color(_ color: Color) -> UIColor {
         return color.color()
     }
-    static func font(font: Font) -> UIFont {
+    static func font(_ font: Font) -> UIFont {
         return font.font()
     }
 }

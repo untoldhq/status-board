@@ -12,16 +12,16 @@ import Decodable
 import CoreLocation
 
 class Vehicle: Object {
-    private dynamic var latitudeInternal = 0.0
-    private dynamic var longitudeInternal = 0.0
-    private dynamic var previousLatitudeInternal = 0.0
-    private dynamic var previousLongitudeInternal = 0.0
+    fileprivate dynamic var latitudeInternal = 0.0
+    fileprivate dynamic var longitudeInternal = 0.0
+    fileprivate dynamic var previousLatitudeInternal = 0.0
+    fileprivate dynamic var previousLongitudeInternal = 0.0
     dynamic var id = 0
     dynamic var name = ""
     dynamic var bearing: CGFloat = 0.0
     dynamic var routeId = 0
     
-    static var timer: NSTimer? = nil
+    static var timer: Timer? = nil
     static let pollingInterval = 5.0
     
     override static func primaryKey() -> String {
@@ -42,7 +42,7 @@ class Vehicle: Object {
     }
     
     var route: Route? {
-        return Data.objectForPrimaryKey(Route.self, key: routeId)
+        return Data.object(ofType: Route.self, forPrimaryKey: routeId)
     }
     var previousLocation: CLLocationCoordinate2D {
         get {
@@ -55,31 +55,31 @@ class Vehicle: Object {
     }
     
     static func startWatching() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: pollingInterval, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
         timer?.fire()
     }
     
     static func tick() {
-        guard Data.objects(WatchedDestination).count > 0 else {
+        guard Data.objects(ofType: WatchedDestination.self).count > 0 else {
             return
         }
-        let routeIds = Data.objects(WatchedDestination.self).map { String($0.route.id) }
-        let routes = routeIds.joinWithSeparator(",")
-        API.manager.request(.Vehicles(parameters: ["routes": routes])) { result in
+        let routeIds = Data.objects(ofType: WatchedDestination.self).map { String($0.route.id) }
+        let routes = routeIds.joined(separator: ",")
+        API.manager.request(.vehicles(parameters: ["routes": routes])) { result in
             switch result {
-            case .Failure(let error):
+            case .failure(let error):
                 print(error)
-            case .Success(let value):
+            case .success(let value):
                 parse(value)
             }
         }
     }
     
-    static func parse(json: AnyObject) {
+    static func parse(_ json: Any) {
         Data.write {
             do {
                 let array = try json => "resultSet" => "vehicle"
-                try [Vehicle].decode(array)
+                _ = try [Vehicle].decode(array)
             }
             catch let error {
                 print(error)
@@ -89,8 +89,8 @@ class Vehicle: Object {
 }
 
 extension Vehicle: Decodable {
-    static func decode(json: AnyObject) throws -> Self {
-        let vehicle = Data.guaranteedObjectForPrimaryKey(self, key: try json => "vehicleID")
+    static func decode(_ json: Any) throws -> Self {
+        let vehicle = Data.guaranteedObject(ofType: self, forPrimaryKey: try json => "vehicleID")
         vehicle.previousLocation = vehicle.location
         vehicle.location = CLLocationCoordinate2D(latitude: try json => "latitude", longitude: try json => "longitude")
         vehicle.name = try json => "signMessage"

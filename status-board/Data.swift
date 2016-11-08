@@ -32,10 +32,10 @@ struct Data {
     let realm = try! Realm()
     // swiftlint:enable force_try
     
-    static func write(block: ()->()) {
+    static func write(_ block: ()->()) {
         manager.write(block)
     }
-    func write(block: ()->()) {
+    func write(_ block: ()->()) {
         do {
             try realm.write(block)
         }
@@ -44,20 +44,20 @@ struct Data {
         }
     }
     
-    static func objectForPrimaryKey<T: Object>(type: T.Type, key: AnyObject?) -> T? {
-        return manager.objectForPrimaryKey(type, key: key)
+    static func object<T : RealmSwift.Object, K>(ofType type: T.Type, forPrimaryKey key: K) -> T? {
+        return manager.object(ofType: type, forPrimaryKey: key)
     }
     
-    func objectForPrimaryKey<T: Object>(type: T.Type, key: AnyObject?) -> T? {
-        return realm.objectForPrimaryKey(type, key: key)
+    func object<T : RealmSwift.Object, K>(ofType type: T.Type, forPrimaryKey key: K) -> T? {
+        return realm.object(ofType: type, forPrimaryKey: key)
     }
     
     // must be called from a write block
-    static func guaranteedObjectForPrimaryKey<T: Object>(type: T.Type, key: AnyObject?) -> T {
-        return manager.guaranteedObjectForPrimaryKey(type, key: key)
+    static func guaranteedObject<T : RealmSwift.Object, K>(ofType type: T.Type, forPrimaryKey key: K) -> T {
+        return manager.guaranteedObject(ofType: type, forPrimaryKey: key)
     }
-    func guaranteedObjectForPrimaryKey<T: Object>(type: T.Type, key: AnyObject?) -> T {
-        if let object = objectForPrimaryKey(type, key: key) {
+    func guaranteedObject<T : RealmSwift.Object, K>(ofType type: T.Type, forPrimaryKey key: K) -> T {
+        if let object = self.object(ofType: type, forPrimaryKey: key) {
             return object
         }
         let object = type.init()
@@ -68,24 +68,24 @@ struct Data {
     
     
     
-    static func objects<T: Object>(type: T.Type) -> Results<T> {
-        return manager.objects(type)
+    static func objects<T: Object>(ofType type: T.Type) -> Results<T> {
+        return manager.objects(ofType: type)
     }
-    func objects<T: Object>(type: T.Type) -> Results<T> {
+    func objects<T: Object>(ofType type: T.Type) -> Results<T> {
         return realm.objects(type)
     }
     
-    static func add(object: Object, update: Bool = false) {
+    static func add(_ object: Object, update: Bool = false) {
         manager.add(object, update: update)
     }
-    func add(object: Object, update: Bool = false) {
+    func add(_ object: Object, update: Bool = false) {
         realm.add(object, update: update)
     }
     
-    static func delete(object: Object) {
+    static func delete(_ object: Object) {
         manager.delete(object)
     }
-    func delete(object: Object) {
+    func delete(_ object: Object) {
         realm.delete(object)
     }
 }

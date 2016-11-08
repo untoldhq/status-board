@@ -15,36 +15,36 @@ class DestinationDecorationView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = Style.color(.Dark)
+        backgroundColor = Style.color(.dark)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let contentInset = DestinationDecorationView.layoutInsets.top
-        let context: CGContextRef = UIGraphicsGetCurrentContext()!
-        CGContextSaveGState(context)
-        let clipPath: CGPathRef = UIBezierPath(roundedRect: CGRectInset(bounds, contentInset - 30, contentInset - 30), cornerRadius: 10.0).CGPath
-        CGContextSetShadow(context, CGSizeMake(0, 0), 5);
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        context.saveGState()
+        let clipPath: CGPath = UIBezierPath(roundedRect: bounds.insetBy(dx: contentInset - 30, dy: contentInset - 30), cornerRadius: 10.0).cgPath
+        context.setShadow(offset: CGSize(width: 0, height: 0), blur: 5);
         
-        CGContextAddPath(context, clipPath)
-        CGContextSetFillColorWithColor(context, Style.color(.Signage).CGColor)
+        context.addPath(clipPath)
+        context.setFillColor(Style.color(.signage).cgColor)
         
-        CGContextClosePath(context)
-        CGContextFillPath(context)
-        CGContextRestoreGState(context)
+        context.closePath()
+        context.fillPath()
+        context.restoreGState()
         
-        CGContextSaveGState(context)
-        let inset: CGPathRef = UIBezierPath(roundedRect: CGRectInset(bounds, contentInset - 15, contentInset - 15), cornerRadius: 8.0).CGPath
-        CGContextAddPath(context, inset)
-        CGContextSetFillColorWithColor(context, Style.color(.Signage).CGColor)
-        CGContextSetLineWidth(context, 5)
-        CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
-        CGContextClosePath(context)
-        CGContextStrokePath(context)
-        CGContextRestoreGState(context)
+        context.saveGState()
+        let inset: CGPath = UIBezierPath(roundedRect: bounds.insetBy(dx: contentInset - 15, dy: contentInset - 15), cornerRadius: 8.0).cgPath
+        context.addPath(inset)
+        context.setFillColor(Style.color(.signage).cgColor)
+        context.setLineWidth(5)
+        context.setStrokeColor(UIColor.white.cgColor)
+        context.closePath()
+        context.strokePath()
+        context.restoreGState()
 
     }
 }

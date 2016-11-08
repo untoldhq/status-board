@@ -11,12 +11,12 @@ import RealmSwift
 import Decodable
 
 class WatchedDestination: Object {
-    private dynamic var routeInternal: Route?
-    private dynamic var stopInternal: Stop?
-    dynamic var id = NSUUID().UUIDString
-    dynamic var nextArrival: NSDate? = nil
+    fileprivate dynamic var routeInternal: Route?
+    fileprivate dynamic var stopInternal: Stop?
+    dynamic var id = UUID().uuidString
+    dynamic var nextArrival: Date? = nil
     
-    static var timer: NSTimer? = nil
+    static var timer: Timer? = nil
     
     var route: Route {
         return routeInternal!
@@ -26,36 +26,36 @@ class WatchedDestination: Object {
     }
     
     static func startWatching() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
         timer?.fire()
     }
     
     static func tick() {
-        guard Data.objects(self).count > 0 else {
+        guard Data.objects(ofType: self).count > 0 else {
             return
         }
-        let stopIds = Data.objects(self).map { String($0.stop.id) }
-        let stops = stopIds.joinWithSeparator(",")
-        API.manager.request(.Arrivals(parameters: ["locIDs": stops])) { result in
+        let stopIds = Data.objects(ofType: self).map { String($0.stop.id) }
+        let stops = stopIds.joined(separator: ",")
+        API.manager.request(.arrivals(parameters: ["locIDs": stops])) { result in
             switch result {
-            case .Failure(let error):
+            case .failure(let error):
                 print(error)
-            case .Success(let value):
+            case .success(let value):
                 parse(value)
             }
         }
     }
     
-    static func parse(json: AnyObject) {
+    static func parse(_ json: Any) {
         Data.write {
             do {
                 let array = try json => "resultSet" => "arrival"
                 let arrivals = try [Arrival].decode(array)
                 for arrival in arrivals {
-                    if let route = Data.objectForPrimaryKey(Route.self, key: arrival.routeId),
-                        stop = Data.objectForPrimaryKey(Stop.self, key: arrival.stopId),
-                        destination = self.destinationForRoute(route, stop: stop),
-                        arrival = arrival.arrivalTime {
+                    if let route = Data.object(ofType: Route.self, forPrimaryKey: arrival.routeId),
+                        let stop = Data.object(ofType: Stop.self, forPrimaryKey: arrival.stopId),
+                        let destination = self.destinationForRoute(route, stop: stop),
+                        let arrival = arrival.arrivalTime {
                         destination.nextArrival = arrival
                     }
                 }
@@ -66,18 +66,18 @@ class WatchedDestination: Object {
         }
     }
     
-    static func isWatched(route: Route, stop: Stop) -> Bool {
+    static func isWatched(_ route: Route, stop: Stop) -> Bool {
         return destinationForRoute(route, stop: stop) != nil
     }
     
-    static func destinationForRoute(route: Route, stop: Stop) -> WatchedDestination? {
-        return Data.objects(self).filter { $0.route == route && $0.stop == stop }.first
+    static func destinationForRoute(_ route: Route, stop: Stop) -> WatchedDestination? {
+        return Data.objects(ofType: self).filter { $0.route == route && $0.stop == stop }.first
     }
-    static func destinationsForRoute(route: Route) -> [WatchedDestination] {
-        return Data.objects(self).filter { $0.route == route }
+    static func destinationsForRoute(_ route: Route) -> [WatchedDestination] {
+        return Data.objects(ofType: self).filter { $0.route == route }
     }
     
-    static func watch(route: Route, stop: Stop) {
+    static func watch(_ route: Route, stop: Stop) {
         let destination = WatchedDestination()
         destination.routeInternal = route
         destination.stopInternal = stop
@@ -86,7 +86,7 @@ class WatchedDestination: Object {
         }
     }
     
-    static func unWatch(route: Route, stop: Stop) {
+    static func unWatch(_ route: Route, stop: Stop) {
         if let destination = destinationForRoute(route, stop: stop) {
             Data.write {
                 Data.delete(destination)
@@ -96,23 +96,24 @@ class WatchedDestination: Object {
 }
 
 struct Arrival {
-    static let dateFormatter: NSDateFormatter = {
+    static let dateFormatter: DateFormatter = {
         $0.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
         return $0
-    }(NSDateFormatter())
+    }(DateFormatter())
 
     let routeId: Int
     let stopId: Int
-    let arrivalTime: NSDate?
+    let arrivalTime: Date?
 }
 
 extension Arrival: Decodable {
-    static func decode(json: AnyObject) throws -> Arrival {
-        let estimated: String = try json =>? "estimated" ?? ""
+    static func decode(_ json: Any) throws -> Arrival {
+        let maybeEstimated: String? = try json =>? "estimated"
+        let estimated: String = maybeEstimated ?? ""
         return try Arrival(
             routeId: json => "route",
             stopId: json => "locid",
-            arrivalTime: Arrival.dateFormatter.dateFromString(estimated)
+            arrivalTime: Arrival.dateFormatter.date(from: estimated)
         )
     }
 }

@@ -12,8 +12,8 @@ import CoreLocation
 import Decodable
 
 class Stop: Object {
-    private dynamic var latitudeInternal = 0.0
-    private dynamic var longitudeInternal = 0.0
+    fileprivate dynamic var latitudeInternal = 0.0
+    fileprivate dynamic var longitudeInternal = 0.0
     dynamic var directionality = ""
     dynamic var id = 0
     dynamic var name = ""
@@ -37,21 +37,21 @@ class Stop: Object {
     }
     
     static func fetch() {
-        API.manager.request(.Stops(parameters: nil)) { result in
+        API.manager.request(.stops(parameters: nil)) { result in
             switch result {
-            case .Failure(let error):
+            case .failure(let error):
                 print(error)
-            case .Success(let value):
+            case .success(let value):
                 parse(value)
             }
         }
     }
     
-    static func parse(json: AnyObject) {
+    static func parse(_ json: Any) {
         Data.write {
             do {
                 let array = try json => "resultSet" => "location"
-                try [Stop].decode(array)
+                _ = try [Stop].decode(array)
             }
             catch let error {
                 print(error)
@@ -62,8 +62,9 @@ class Stop: Object {
 }
 
 extension Stop: Decodable {
-    static func decode(json: AnyObject) throws -> Self {
-        let stop = Data.guaranteedObjectForPrimaryKey(self, key: try json => "locid")
+    
+    static func decode(_ json: Any) throws -> Self {
+        let stop = Data.guaranteedObject(ofType: self, forPrimaryKey: try json => "locid")
         stop.directionality = try json => "dir"
         stop.location = CLLocationCoordinate2D(latitude: try json => "lat", longitude: try json => "lng")
         stop.name = try json => "desc"
