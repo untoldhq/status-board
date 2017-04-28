@@ -43,7 +43,7 @@ struct API {
             case .stops(let parameters):
                 overrides = parameters
                 allParameters["feet"] = 2640 as AnyObject?
-                allParameters["ll"] = "\(Location.manager.location.latitude),\(Location.manager.location.longitude)" as AnyObject?
+                allParameters["ll"] = "\(LocationManager.manager.location.latitude),\(LocationManager.manager.location.longitude)" as AnyObject?
                 allParameters["showRoutes"] = "true" as AnyObject?
             case .arrivals(let parameters):
                 overrides = parameters

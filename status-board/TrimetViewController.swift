@@ -12,13 +12,13 @@ import RealmSwift
 class TrimetViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
-    let numberOfSections = 1
-
-    lazy var dataSource: Results<WatchedDestination>! = {
-        return Data.objects(ofType: WatchedDestination.self)
-    }()
     
-    var notificationToken: NotificationToken? = nil
+    let numberOfSections = 1
+    let context = DataManager.context()
+
+    var dataSource: Results<WatchedDestination>! //DataManager.objects(inContext: context, ofType: WatchedDestination.self)
+    
+    var notificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +26,21 @@ class TrimetViewController: UIViewController {
         let layout = collectionView.collectionViewLayout as! DestinationLayout
         layout.register(DestinationDecorationView.self, forDecorationViewOfKind: "signage")
         
-        notificationToken = dataSource.addNotificationBlock { [weak self] changes in
-            guard let collectionView = self?.collectionView else {
-                return
-            }
+        reload()
+    
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        performSegue(withIdentifier: "showMonitor", sender: nil)
+    }
+    
+    func reload() {
+        notificationToken?.stop()
+        notificationToken = nil
+        dataSource = DataManager.objects(inContext: context, ofType: WatchedDestination.self)
+        notificationToken = dataSource.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+            guard let collectionView = self?.collectionView else { return }
             switch changes {
             case .initial:
                 collectionView.reloadData()
@@ -48,11 +59,7 @@ class TrimetViewController: UIViewController {
                 print(error)
             }
         }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        performSegue(withIdentifier: "showMonitor", sender: nil)
+        
     }
     
     func updateRowsAtIndexPaths(_ paths: [IndexPath]) {

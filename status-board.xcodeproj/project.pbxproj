@@ -16,7 +16,7 @@
 		180A8E0E1D8DC3480023DEF7 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E0D1D8DC3480023DEF7 /* Vehicle.swift */; };
 		180A8E101D8DCD1C0023DEF7 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E0F1D8DCD1C0023DEF7 /* RootViewController.swift */; };
 		180A8E121D8DCE6F0023DEF7 /* TrimetMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E111D8DCE6F0023DEF7 /* TrimetMapViewController.swift */; };
-		180A8E151D8DCFE50023DEF7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E141D8DCFE50023DEF7 /* Location.swift */; };
+		180A8E151D8DCFE50023DEF7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E141D8DCFE50023DEF7 /* LocationManager.swift */; };
 		180A8E171D8DD5720023DEF7 /* VehicleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E161D8DD5720023DEF7 /* VehicleAnnotation.swift */; };
 		180A8E191D8DE3A40023DEF7 /* CGFloat+Trig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E181D8DE3A40023DEF7 /* CGFloat+Trig.swift */; };
 		180A8E1C1D8DEF4C0023DEF7 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E1B1D8DEF4C0023DEF7 /* Style.swift */; };
@@ -34,9 +34,10 @@
 		1837A9851D7FC062000ED091 /* TrimetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9841D7FC062000ED091 /* TrimetViewController.swift */; };
 		1837A9881D7FC062000ED091 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1837A9861D7FC062000ED091 /* Main.storyboard */; };
 		1837A98A1D7FC062000ED091 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1837A9891D7FC062000ED091 /* Assets.xcassets */; };
-		1837A9921D7FC28C000ED091 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9911D7FC28C000ED091 /* Data.swift */; };
+		1837A9921D7FC28C000ED091 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9911D7FC28C000ED091 /* DataManager.swift */; };
 		1837A9941D7FC331000ED091 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9931D7FC330000ED091 /* API.swift */; };
 		31A30D2E460AAA585A719955 /* Pods_status_board.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75FE7C4D88DA3B367C94CFE1 /* Pods_status_board.framework */; };
+		DB3A112E1EB3C309007A9305 /* PrintExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3A112D1EB3C309007A9305 /* PrintExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +50,7 @@
 		180A8E0D1D8DC3480023DEF7 /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		180A8E0F1D8DCD1C0023DEF7 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		180A8E111D8DCE6F0023DEF7 /* TrimetMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrimetMapViewController.swift; sourceTree = "<group>"; };
-		180A8E141D8DCFE50023DEF7 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		180A8E141D8DCFE50023DEF7 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		180A8E161D8DD5720023DEF7 /* VehicleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleAnnotation.swift; sourceTree = "<group>"; };
 		180A8E181D8DE3A40023DEF7 /* CGFloat+Trig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Trig.swift"; sourceTree = "<group>"; };
 		180A8E1B1D8DEF4C0023DEF7 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
@@ -69,10 +70,11 @@
 		1837A9871D7FC062000ED091 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1837A9891D7FC062000ED091 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1837A98B1D7FC062000ED091 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1837A9911D7FC28C000ED091 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		1837A9911D7FC28C000ED091 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		1837A9931D7FC330000ED091 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		75FE7C4D88DA3B367C94CFE1 /* Pods_status_board.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_status_board.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D339B6B0DA03295943280380 /* Pods-status-board.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-status-board.release.xcconfig"; path = "Pods/Target Support Files/Pods-status-board/Pods-status-board.release.xcconfig"; sourceTree = "<group>"; };
+		DB3A112D1EB3C309007A9305 /* PrintExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintExtensions.swift; sourceTree = "<group>"; };
 		DEFBBD637EA586C170FECE24 /* Pods-status-board.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-status-board.debug.xcconfig"; path = "Pods/Target Support Files/Pods-status-board/Pods-status-board.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,9 +128,9 @@
 		180A8E131D8DCFDA0023DEF7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				1837A9911D7FC28C000ED091 /* Data.swift */,
+				1837A9911D7FC28C000ED091 /* DataManager.swift */,
 				1837A9931D7FC330000ED091 /* API.swift */,
-				180A8E141D8DCFE50023DEF7 /* Location.swift */,
+				180A8E141D8DCFE50023DEF7 /* LocationManager.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				180A8E181D8DE3A40023DEF7 /* CGFloat+Trig.swift */,
+				DB3A112D1EB3C309007A9305 /* PrintExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -348,12 +351,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1837A9851D7FC062000ED091 /* TrimetViewController.swift in Sources */,
-				1837A9921D7FC28C000ED091 /* Data.swift in Sources */,
+				1837A9921D7FC28C000ED091 /* DataManager.swift in Sources */,
 				180A8E101D8DCD1C0023DEF7 /* RootViewController.swift in Sources */,
 				1837A9941D7FC331000ED091 /* API.swift in Sources */,
 				180A8DFD1D8C73A50023DEF7 /* Route.swift in Sources */,
+				DB3A112E1EB3C309007A9305 /* PrintExtensions.swift in Sources */,
 				1837A9831D7FC062000ED091 /* AppDelegate.swift in Sources */,
-				180A8E151D8DCFE50023DEF7 /* Location.swift in Sources */,
+				180A8E151D8DCFE50023DEF7 /* LocationManager.swift in Sources */,
 				180A8E121D8DCE6F0023DEF7 /* TrimetMapViewController.swift in Sources */,
 				180A8E071D8CBFC60023DEF7 /* ManageDestinationsDetailViewController.swift in Sources */,
 				180A8E171D8DD5720023DEF7 /* VehicleAnnotation.swift in Sources */,

@@ -8,14 +8,19 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class ManageDestinationsViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
-    let dataSource = Data.objects(ofType: Route.self).sorted(byProperty: "id")
-   
+    let context = DataManager.context()
+    var dataSource: Results<Route>!
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         title = "Nearby Routes"
+        
+        dataSource = DataManager.objects(inContext: context, ofType: Route.self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

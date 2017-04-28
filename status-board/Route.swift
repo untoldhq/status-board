@@ -75,7 +75,8 @@ class Route: Object {
 
 extension Route: Decodable {
     static func decode(_ json: Any) throws -> Self {
-        let route = Data.guaranteedObject(ofType: self, forPrimaryKey: try json => "route")
+        let context = DataManager.context()
+        let route = DataManager.guaranteedObject(inContext: context, ofType: self, forPrimaryKey: try json => "route")
         let routeTypeCode: String = try json => "type"
         if routeTypeCode == "B" {
             route.routeType = .bus

@@ -43,13 +43,14 @@ class Stop: Object {
             case .failure(let error):
                 print(error)
             case .success(let value):
-                parse(value)
+                let context = DataManager.context()
+                parse(value, inContext: context)
             }
         }
     }
     
-    static func parse(_ json: Any) {
-        Data.write {
+    static func parse(_ json: Any, inContext context: Realm) {
+        DataManager.write(inContext: context) {
             do {
                 let array = try json => "resultSet" => "location"
                 _ = try [Stop].decode(array)
@@ -65,7 +66,8 @@ class Stop: Object {
 extension Stop: Decodable {
     
     static func decode(_ json: Any) throws -> Self {
-        let stop = Data.guaranteedObject(ofType: self, forPrimaryKey: try json => "locid")
+        let context = DataManager.context()
+        let stop = DataManager.guaranteedObject(inContext: context, ofType: self, forPrimaryKey: try json => "locid")
         stop.directionality = try json => "dir"
         stop.location = CLLocationCoordinate2D(latitude: try json => "lat", longitude: try json => "lng")
         stop.name = try json => "desc"

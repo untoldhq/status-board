@@ -9,8 +9,8 @@
 import Foundation
 import CoreLocation
 
-struct Location {
-    static let manager = Location()
+struct LocationManager {
+    static let manager = LocationManager()
     let location = CLLocationCoordinate2D(latitude: 45.5202644, longitude: -122.6744711)
     let region : CLCircularRegion
     init() {

@@ -16,18 +16,19 @@ class TrimetMapViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
     
     lazy var unfilteredDataSource: Results<Vehicle>! = {
-        return Data.objects(ofType: Vehicle.self)
+        let context = DataManager.context()
+        return DataManager.objects(inContext: context, ofType: Vehicle.self)
     }()
     var notificationToken: NotificationToken? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let region = Location.manager.region
+        let region = LocationManager.manager.region
         mapView.region = mapView.regionThatFits(MKCoordinateRegionMakeWithDistance(region.center, region.radius * 2, region.radius * 2))
         mapView.delegate = self
         
         notificationToken = unfilteredDataSource.addNotificationBlock { [weak self] changes in
-            guard let mapView = self?.mapView else {
+            guard (self?.mapView) != nil else {
                 return
             }
             switch changes {
@@ -46,7 +47,7 @@ class TrimetMapViewController: UIViewController {
     
     func dataSource() -> [Vehicle] {
         return unfilteredDataSource.filter { vehicle -> Bool in
-            Location.manager.region.contains(vehicle.location)
+            LocationManager.manager.region.contains(vehicle.location)
         }
     }
     
@@ -80,13 +81,15 @@ extension TrimetMapViewController: MKMapViewDelegate {
         switch annotation {
         case let vehicleAnnotation as VehicleAnnotation:
             let annotationView: VehicleAnnotationView
+            let context = DataManager.context()
             if let existing = mapView.dequeueReusableAnnotationView(withIdentifier: "annotation") as? VehicleAnnotationView {
                 annotationView = existing
             }
             else {
                 annotationView = VehicleAnnotationView(annotation: vehicleAnnotation, reuseIdentifier: "annotation")
             }
-            if let vehicle = Data.object(ofType: Vehicle.self, forPrimaryKey: vehicleAnnotation.vehicleId) {
+            
+            if let vehicle = DataManager.object(inContext: context, ofType: Vehicle.self, forPrimaryKey: vehicleAnnotation.vehicleId) {
                 if let route = vehicle.route {
                     annotationView.labelText = route.compactLabel
                     annotationView.routeType = route.routeType

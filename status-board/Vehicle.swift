@@ -43,7 +43,8 @@ class Vehicle: Object {
     }
     
     var route: Route? {
-        return Data.object(ofType: Route.self, forPrimaryKey: routeId)
+        let context = DataManager.context()
+        return DataManager.object(inContext: context, ofType: Route.self, forPrimaryKey: routeId)
     }
     
     var previousLocation: CLLocationCoordinate2D {
@@ -62,23 +63,24 @@ class Vehicle: Object {
     }
     
     static func tick() {
-        guard Data.objects(ofType: WatchedDestination.self).count > 0 else {
+        let context = DataManager.context()
+        guard DataManager.objects(inContext: context, ofType: WatchedDestination.self).count > 0 else {
             return
         }
-        let routeIds = Data.objects(ofType: WatchedDestination.self).map { String($0.route.id) }
+        let routeIds = DataManager.objects(inContext: context, ofType: WatchedDestination.self).map { String($0.route.id) }
         let routes = routeIds.joined(separator: ",")
         API.manager.request(.vehicles(parameters: ["routes": routes])) { result in
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let value):
-                parse(value)
+                parse(value, inContext: context)
             }
         }
     }
     
-    static func parse(_ json: Any) {
-        Data.write {
+    static func parse(_ json: Any, inContext context: Realm) {
+        DataManager.write(inContext: context) {
             do {
                 let array = try json => "resultSet" => "vehicle"
                 _ = try [Vehicle].decode(array)
@@ -92,7 +94,8 @@ class Vehicle: Object {
 
 extension Vehicle: Decodable {
     static func decode(_ json: Any) throws -> Self {
-        let vehicle = Data.guaranteedObject(ofType: self, forPrimaryKey: try json => "vehicleID")
+        let context = DataManager.context()
+        let vehicle = DataManager.guaranteedObject(inContext: context, ofType: self, forPrimaryKey: try json => "vehicleID")
         vehicle.previousLocation = vehicle.location
         vehicle.location = CLLocationCoordinate2D(latitude: try json => "latitude", longitude: try json => "longitude")
         vehicle.name = try json => "signMessage"
