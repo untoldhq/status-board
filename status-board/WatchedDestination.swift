@@ -21,6 +21,7 @@ class WatchedDestination: Object {
     var route: Route {
         return routeInternal!
     }
+    
     var stop: Stop {
         return stopInternal!
     }
@@ -73,6 +74,7 @@ class WatchedDestination: Object {
     static func destinationForRoute(_ route: Route, stop: Stop) -> WatchedDestination? {
         return Data.objects(ofType: self).filter { $0.route == route && $0.stop == stop }.first
     }
+    
     static func destinationsForRoute(_ route: Route) -> [WatchedDestination] {
         return Data.objects(ofType: self).filter { $0.route == route }
     }

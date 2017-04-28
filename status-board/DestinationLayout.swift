@@ -13,8 +13,11 @@ class DestinationLayout: UICollectionViewFlowLayout {
     let sectionWidth = UIScreen.main.bounds.size.width / 2
 
     override func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        guard let collectionView = collectionView else {
+            return nil
+        }
         let layoutAttributes = UICollectionViewLayoutAttributes(forDecorationViewOfKind: elementKind, with: indexPath)
-        layoutAttributes.frame = CGRect(x: CGFloat(indexPath.section) * sectionWidth, y: 0, width: sectionWidth, height: collectionViewContentSize.height)
+        layoutAttributes.frame = CGRect(x: CGFloat(indexPath.item / maxItemsPerSection(collectionView)) * sectionWidth, y: 0, width: sectionWidth, height: collectionViewContentSize.height)
         layoutAttributes.zIndex = -1
         return layoutAttributes
     }
@@ -24,18 +27,16 @@ class DestinationLayout: UICollectionViewFlowLayout {
             return nil
         }
         var attributes = [UICollectionViewLayoutAttributes]()
-        for i in 0..<collectionView.numberOfSections {
-            if let attribute = layoutAttributesForDecorationView(ofKind: "signage", at: IndexPath(item: 0, section: i)) {
+        
+        for i in 0..<collectionView.numberOfItems(inSection: 0) {
+            if let attribute = layoutAttributesForItem(at: IndexPath(item: i, section: 0)) {
+                attributes.append(attribute)
+            }
+            if let attribute = layoutAttributesForDecorationView(ofKind: "signage", at: IndexPath(item: i, section: 0)), i % 3 == 0 {
                 attributes.append(attribute)
             }
         }
-        for i in 0..<collectionView.numberOfSections {
-            for j in 0..<collectionView.numberOfItems(inSection: i) {
-                if let attribute = layoutAttributesForItem(at: IndexPath(item: j, section: i)) {
-                    attributes.append(attribute)
-                }
-            }
-        }
+        
         return attributes
     }
     
@@ -44,17 +45,21 @@ class DestinationLayout: UICollectionViewFlowLayout {
             return nil
         }
         let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+        let column = indexPath.item / maxItemsPerSection(collectionView)
+        let row = indexPath.item % maxItemsPerSection(collectionView)
+        
         let rect = CGRect(
-            x: CGFloat(indexPath.section) * sectionWidth,
+            x: CGFloat(column) * sectionWidth,
             y: 0,
             width: sectionWidth,
             height: collectionView.bounds.height)
+        
         let inset = UIEdgeInsetsInsetRect(rect, DestinationDecorationView.layoutInsets)
         
         let itemHeight: CGFloat = inset.height / CGFloat(maxItemsPerSection(collectionView))
         attributes.frame = CGRect(
             x: inset.origin.x,
-            y: inset.origin.y + CGFloat(indexPath.item) * itemHeight,
+            y: inset.origin.y + CGFloat(row) * itemHeight,
             width: inset.width,
             height: itemHeight)
         return attributes

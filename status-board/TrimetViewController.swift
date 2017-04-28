@@ -12,10 +12,12 @@ import RealmSwift
 class TrimetViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
+    let numberOfSections = 1
 
     lazy var dataSource: Results<WatchedDestination>! = {
         return Data.objects(ofType: WatchedDestination.self)
     }()
+    
     var notificationToken: NotificationToken? = nil
     
     override func viewDidLoad() {
@@ -32,6 +34,7 @@ class TrimetViewController: UIViewController {
             case .initial:
                 collectionView.reloadData()
             case .update(_, let deletions, let insertions, let modifications):
+                
                 collectionView.performBatchUpdates({
                     if let strongSelf = self {
                         collectionView.insertItems(at: insertions.map(strongSelf.transformIndexPath))
@@ -51,15 +54,16 @@ class TrimetViewController: UIViewController {
         super.viewDidAppear(animated)
         performSegue(withIdentifier: "showMonitor", sender: nil)
     }
+    
     func transformIndexPath(_ index: Int) -> IndexPath {
-        let item = index % maxItemsPerSection()
-        let section = index / maxItemsPerSection()
-        return IndexPath(item: item, section: section)
+        let item = index
+        return IndexPath(item: item, section: 0)
     }
     
     func reverseTransformIndexPath(_ indexPath: IndexPath) -> Int {
-        return indexPath.section * maxItemsPerSection() + indexPath.row
+        return indexPath.section
     }
+    
     func updateRowsAtIndexPaths(_ paths: [IndexPath]) {
         for indexPath in paths {
             if let cell = collectionView.cellForItem(at: indexPath) as? TrimetDestinationCell {
@@ -83,27 +87,17 @@ class TrimetViewController: UIViewController {
             }
             cell.directionLabel.text = destination.stop.directionality
             cell.vehicleImageView.image = destination.route.routeType == .bus ? UIImage(named: "bus") : UIImage(named: "rail")
-//            if destination.route.routeType == .Bus {
-//                cell.routeNumberLabel.text = destination.route.compactLabel
-//            }
-//            else {
-//                cell.routeNumberLabel.text = ""
-//            }
         }
         else {
             cell.timeLabel.text = "Unknown"
         }
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func maxItemsPerSection() -> Int {
-        let layout = collectionView.collectionViewLayout as! DestinationLayout
-        return layout.maxItemsPerSection(collectionView)
-    }
-
 }
 
 extension TrimetViewController: UICollectionViewDataSource {
@@ -112,16 +106,12 @@ extension TrimetViewController: UICollectionViewDataSource {
         updateLabelsForCell(cell, indexPath: indexPath)
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        _ = maxItemsPerSection()
-        let sections = numberOfSections(in: collectionView)
-        if section != sections - 1 {
-            return maxItemsPerSection()
-        }
-        let fullSections = dataSource.count / maxItemsPerSection()
-        return dataSource.count - fullSections * maxItemsPerSection()
+        return dataSource.count
     }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Int(ceil(CGFloat(dataSource.count) / CGFloat(maxItemsPerSection())))
+        return numberOfSections
     }
 }

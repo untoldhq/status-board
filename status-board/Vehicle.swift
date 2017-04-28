@@ -27,6 +27,7 @@ class Vehicle: Object {
     override static func primaryKey() -> String {
         return "id"
     }
+    
     override static func ignoredProperties() -> [String] {
         return ["location", "previousLocation"]
     }
@@ -44,6 +45,7 @@ class Vehicle: Object {
     var route: Route? {
         return Data.object(ofType: Route.self, forPrimaryKey: routeId)
     }
+    
     var previousLocation: CLLocationCoordinate2D {
         get {
             return CLLocationCoordinate2D(latitude: latitudeInternal, longitude: longitudeInternal)
