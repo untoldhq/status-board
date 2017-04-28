@@ -36,13 +36,13 @@ class TrimetViewController: UIViewController {
             case .update(_, let deletions, let insertions, let modifications):
                 
                 collectionView.performBatchUpdates({
-                    if let strongSelf = self {
-                        collectionView.insertItems(at: insertions.map(strongSelf.transformIndexPath))
-                        collectionView.deleteItems(at: deletions.map(strongSelf.transformIndexPath))
+                    if self != nil {
+                        collectionView.insertItems(at: insertions.map { IndexPath(item: $0, section: 0) })
+                        collectionView.deleteItems(at: deletions.map { IndexPath(item: $0, section: 0) })
                     }
                 }, completion: nil)
-                if let strongSelf = self {
-                    self?.updateRowsAtIndexPaths(modifications.map(strongSelf.transformIndexPath))
+                if self != nil {
+                    self?.updateRowsAtIndexPaths(modifications.map { IndexPath(item: $0, section: 0) })
                 }
             case .error(let error):
                 print(error)
@@ -55,15 +55,6 @@ class TrimetViewController: UIViewController {
         performSegue(withIdentifier: "showMonitor", sender: nil)
     }
     
-    func transformIndexPath(_ index: Int) -> IndexPath {
-        let item = index
-        return IndexPath(item: item, section: 0)
-    }
-    
-    func reverseTransformIndexPath(_ indexPath: IndexPath) -> Int {
-        return indexPath.section
-    }
-    
     func updateRowsAtIndexPaths(_ paths: [IndexPath]) {
         for indexPath in paths {
             if let cell = collectionView.cellForItem(at: indexPath) as? TrimetDestinationCell {
@@ -73,7 +64,7 @@ class TrimetViewController: UIViewController {
     }
     
     func updateLabelsForCell(_ cell: TrimetDestinationCell, indexPath: IndexPath) {
-        let destination = dataSource[reverseTransformIndexPath(indexPath)]
+        let destination = dataSource[indexPath.item]
         cell.routeLabel.text = destination.route.name
         cell.stopLabel.text = destination.stop.name
         if let arrival = destination.nextArrival?.timeIntervalSince1970 {
