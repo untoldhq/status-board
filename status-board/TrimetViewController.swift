@@ -36,14 +36,12 @@ class TrimetViewController: UIViewController {
             case .update(_, let deletions, let insertions, let modifications):
                 
                 collectionView.performBatchUpdates({
-                    if self != nil {
-                        collectionView.insertItems(at: insertions.map { IndexPath(item: $0, section: 0) })
-                        collectionView.deleteItems(at: deletions.map { IndexPath(item: $0, section: 0) })
-                    }
+                    collectionView.insertItems(at: insertions.map { IndexPath(item: $0, section: 0) })
+                    collectionView.deleteItems(at: deletions.map { IndexPath(item: $0, section: 0) })
+                    
                 }, completion: nil)
-                if self != nil {
-                    self?.updateRowsAtIndexPaths(modifications.map { IndexPath(item: $0, section: 0) })
-                }
+                
+                self?.updateRowsAtIndexPaths(modifications.map { IndexPath(item: $0, section: 0) })
             case .error(let error):
                 print(error)
             }
