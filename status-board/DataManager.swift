@@ -15,7 +15,7 @@ struct DataManager {
     init() {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
-            schemaVersion: 6,
+            schemaVersion: 7,
             migrationBlock: { migration, oldSchemaVersion in
                 
         })
@@ -45,15 +45,6 @@ struct DataManager {
             print("Critical: Failed to write")
         }
     }
-    
-//    func write(_ block: ()->()) {
-//        do {
-//            try realm.write(block)
-//        }
-//        catch {
-//            print(error)
-//        }
-//    }
     
     func add(inContext realm: Realm, object: Object) {
         let type = type(of: object)
@@ -97,7 +88,7 @@ struct DataManager {
     }
     
     static func guaranteedObject<T : Object, K>(inContext realm: Realm, ofType type: T.Type, forPrimaryKey key: K) -> T {
-        return DataManager.guaranteedObject(inContext: realm, ofType: type, forPrimaryKey: key)
+        return sharedInstance.guaranteedObject(inContext: realm, ofType: type, forPrimaryKey: key)
     }
     func guaranteedObject<T : Object, K>(inContext realm: Realm, ofType type: T.Type, forPrimaryKey key: K) -> T {
         if let object = self.object(inContext: realm, ofType: type, forPrimaryKey: key) {
@@ -109,50 +100,4 @@ struct DataManager {
         return object
     }
     
-
-    
-    // must be called from a write block
-//    static func guaranteedObject<T : RealmSwift.Object, K>(ofType type: T.Type, forPrimaryKey key: K) -> T {
-//        return manager.guaranteedObject(ofType: type, forPrimaryKey: key)
-//    }
-//    func guaranteedObject<T : RealmSwift.Object, K>(ofType type: T.Type, forPrimaryKey key: K) -> T {
-//        if let object = self.object(ofType: type, forPrimaryKey: key) {
-//            return object
-//        }
-//        let object = type.init()
-//        object.setValue(key, forKey: type.primaryKey()!)
-//        self.add(object)
-//        return object
-//    }
-//
-    
-    //    static func object<T : RealmSwift.Object, K>(ofType type: T.Type, forPrimaryKey key: K) -> T? {
-    //        return manager.object(ofType: type, forPrimaryKey: key)
-    //    }
-    //
-    //    func object<T : RealmSwift.Object, K>(ofType type: T.Type, forPrimaryKey key: K) -> T? {
-    //        return realm.object(ofType: type, forPrimaryKey: key)
-    //    }
-    
-    
-//    static func objects<T: Object>(ofType type: T.Type) -> Results<T> {
-//        return manager.objects(ofType: type)
-//    }
-//    func objects<T: Object>(ofType type: T.Type) -> Results<T> {
-//        return realm.objects(type)
-//    }
-//    
-//    static func add(_ object: Object, update: Bool = false) {
-//        manager.add(object, update: update)
-//    }
-//    func add(_ object: Object, update: Bool = false) {
-//        realm.add(object, update: update)
-//    }
-//    
-//    static func delete(_ object: Object) {
-//        manager.delete(object)
-//    }
-//    func delete(_ object: Object) {
-//        realm.delete(object)
-//    }
 }

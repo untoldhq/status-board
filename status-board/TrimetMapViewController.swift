@@ -15,10 +15,11 @@ class TrimetMapViewController: UIViewController {
     
     @IBOutlet var mapView: MKMapView!
     
-    lazy var unfilteredDataSource: Results<Vehicle>! = {
+    var unfilteredDataSource: Results<Vehicle>! = {
         let context = DataManager.context()
         return DataManager.objects(inContext: context, ofType: Vehicle.self)
     }()
+    
     var notificationToken: NotificationToken? = nil
 
     override func viewDidLoad() {
@@ -59,7 +60,7 @@ class TrimetMapViewController: UIViewController {
             }
             else {
                 annotation = VehicleAnnotation(id: vehicle.id)
-                mapView.addAnnotation(annotation)
+                updatePosition(for: vehicle, with: annotation)
             }
             UIView.animate(withDuration: Vehicle.pollingInterval) {
                 annotation.coordinate = vehicle.location
@@ -72,6 +73,16 @@ class TrimetMapViewController: UIViewController {
     func annotationForVehicle(_ vehicle: Vehicle) -> VehicleAnnotation? {
         let vehicleAnnotations = mapView.annotations.flatMap { $0 as? VehicleAnnotation }
         return vehicleAnnotations.filter { $0.vehicleId == vehicle.id }.first
+    }
+    
+    func updatePosition(for vehicle: Vehicle, with annotation: VehicleAnnotation) {
+        let currentTime = Date().timeIntervalSince1970 * 1000.0
+        if currentTime < vehicle.expiringTime {
+            mapView.addAnnotation(annotation)
+        }
+        else {
+            mapView.removeAnnotation(annotation)
+        }
     }
     
 }

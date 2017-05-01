@@ -20,6 +20,7 @@ class Vehicle: Object {
     dynamic var name = ""
     dynamic var bearing: CGFloat = 0.0
     dynamic var routeId = 0
+    dynamic var expiringTime = 0.0
     
     static var timer: Timer? = nil
     static let pollingInterval = 5.0
@@ -100,6 +101,7 @@ extension Vehicle: Decodable {
         vehicle.location = CLLocationCoordinate2D(latitude: try json => "latitude", longitude: try json => "longitude")
         vehicle.name = try json => "signMessage"
         vehicle.routeId = try json => "routeNumber"
+        vehicle.expiringTime = try json => "expires"
         let bearing: Double = try json => "bearing"
         vehicle.bearing = CGFloat(bearing)
         return vehicle
