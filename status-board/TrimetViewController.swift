@@ -12,10 +12,12 @@ import RealmSwift
 class TrimetViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
+    let numberOfSections = 1
 
     lazy var dataSource: Results<WatchedDestination>! = {
         return Data.objects(ofType: WatchedDestination.self)
     }()
+    
     var notificationToken: NotificationToken? = nil
     
     override func viewDidLoad() {
@@ -32,15 +34,14 @@ class TrimetViewController: UIViewController {
             case .initial:
                 collectionView.reloadData()
             case .update(_, let deletions, let insertions, let modifications):
+                
                 collectionView.performBatchUpdates({
-                    if let strongSelf = self {
-                        collectionView.insertItems(at: insertions.map(strongSelf.transformIndexPath))
-                        collectionView.deleteItems(at: deletions.map(strongSelf.transformIndexPath))
-                    }
+                    collectionView.insertItems(at: insertions.map { IndexPath(item: $0, section: 0) })
+                    collectionView.deleteItems(at: deletions.map { IndexPath(item: $0, section: 0) })
+                    
                 }, completion: nil)
-                if let strongSelf = self {
-                    self?.updateRowsAtIndexPaths(modifications.map(strongSelf.transformIndexPath))
-                }
+                
+                self?.updateRowsAtIndexPaths(modifications.map { IndexPath(item: $0, section: 0) })
             case .error(let error):
                 print(error)
             }
@@ -51,15 +52,7 @@ class TrimetViewController: UIViewController {
         super.viewDidAppear(animated)
         performSegue(withIdentifier: "showMonitor", sender: nil)
     }
-    func transformIndexPath(_ index: Int) -> IndexPath {
-        let item = index % maxItemsPerSection()
-        let section = index / maxItemsPerSection()
-        return IndexPath(item: item, section: section)
-    }
     
-    func reverseTransformIndexPath(_ indexPath: IndexPath) -> Int {
-        return indexPath.section * maxItemsPerSection() + indexPath.row
-    }
     func updateRowsAtIndexPaths(_ paths: [IndexPath]) {
         for indexPath in paths {
             if let cell = collectionView.cellForItem(at: indexPath) as? TrimetDestinationCell {
@@ -69,7 +62,7 @@ class TrimetViewController: UIViewController {
     }
     
     func updateLabelsForCell(_ cell: TrimetDestinationCell, indexPath: IndexPath) {
-        let destination = dataSource[reverseTransformIndexPath(indexPath)]
+        let destination = dataSource[indexPath.item]
         cell.routeLabel.text = destination.route.name
         cell.stopLabel.text = destination.stop.name
         if let arrival = destination.nextArrival?.timeIntervalSince1970 {
@@ -83,27 +76,17 @@ class TrimetViewController: UIViewController {
             }
             cell.directionLabel.text = destination.stop.directionality
             cell.vehicleImageView.image = destination.route.routeType == .bus ? UIImage(named: "bus") : UIImage(named: "rail")
-//            if destination.route.routeType == .Bus {
-//                cell.routeNumberLabel.text = destination.route.compactLabel
-//            }
-//            else {
-//                cell.routeNumberLabel.text = ""
-//            }
         }
         else {
             cell.timeLabel.text = "Unknown"
         }
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func maxItemsPerSection() -> Int {
-        let layout = collectionView.collectionViewLayout as! DestinationLayout
-        return layout.maxItemsPerSection(collectionView)
-    }
-
 }
 
 extension TrimetViewController: UICollectionViewDataSource {
@@ -112,16 +95,12 @@ extension TrimetViewController: UICollectionViewDataSource {
         updateLabelsForCell(cell, indexPath: indexPath)
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        _ = maxItemsPerSection()
-        let sections = numberOfSections(in: collectionView)
-        if section != sections - 1 {
-            return maxItemsPerSection()
-        }
-        let fullSections = dataSource.count / maxItemsPerSection()
-        return dataSource.count - fullSections * maxItemsPerSection()
+        return dataSource.count
     }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Int(ceil(CGFloat(dataSource.count) / CGFloat(maxItemsPerSection())))
+        return numberOfSections
     }
 }

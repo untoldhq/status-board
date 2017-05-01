@@ -36,6 +36,7 @@ extension ManageDestinationsViewController: UITableViewDataSource {
         cell.accessoryType = .disclosureIndicator
         return cell
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }

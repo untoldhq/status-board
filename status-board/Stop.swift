@@ -22,6 +22,7 @@ class Stop: Object {
     override static func primaryKey() -> String {
         return "id"
     }
+    
     override static func ignoredProperties() -> [String] {
         return ["location"]
     }
