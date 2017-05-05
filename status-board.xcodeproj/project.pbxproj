@@ -254,7 +254,7 @@
 				TargetAttributes = {
 					1837A97E1D7FC062000ED091 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 53ATSGPDNR;
+						DevelopmentTeam = 9F454FHSS8;
 						LastSwiftMigration = 0810;
 					};
 				};
@@ -482,10 +482,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 53ATSGPDNR;
+				DEVELOPMENT_TEAM = 9F454FHSS8;
 				INFOPLIST_FILE = "status-board/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.untold.status-board";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.untold.dev.status-board";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -498,10 +498,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 53ATSGPDNR;
+				DEVELOPMENT_TEAM = 9F454FHSS8;
 				INFOPLIST_FILE = "status-board/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.untold.status-board";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.untold.dev.status-board";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
