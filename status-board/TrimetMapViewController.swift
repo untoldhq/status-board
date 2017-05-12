@@ -104,6 +104,7 @@ extension TrimetMapViewController: MKMapViewDelegate {
                 if let route = vehicle.route {
                     annotationView.labelText = route.compactLabel
                     annotationView.routeType = route.routeType
+                    annotationView.setNeedsDisplay()
                 }
             }
             return annotationView
