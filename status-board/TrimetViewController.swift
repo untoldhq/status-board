@@ -22,11 +22,13 @@ class TrimetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        collectionView.contentInset = UIEdgeInsets(top: -60, left: 0, bottom: 0, right: 0)
+        edgesForExtendedLayout = UIRectEdge(rawValue: 0)
+        automaticallyAdjustsScrollViewInsets = false
         let layout = collectionView.collectionViewLayout as! DestinationLayout
         layout.register(DestinationDecorationView.self, forDecorationViewOfKind: "signage")
         
-        notificationToken = dataSource.addNotificationBlock { [weak self] changes in
+        notificationToken = dataSource.observe { [weak self] changes in
             guard let collectionView = self?.collectionView else {
                 return
             }
@@ -102,5 +104,11 @@ extension TrimetViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return numberOfSections
+    }
+}
+
+extension TrimetViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets.zero
     }
 }

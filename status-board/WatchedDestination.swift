@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import Decodable
+import protocol Decodable.Decodable
 
 class WatchedDestination: Object {
     fileprivate dynamic var routeInternal: Route?

@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import Decodable
+import protocol Decodable.Decodable
 import CoreLocation
 
 class Vehicle: Object {

@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import CoreLocation
 import Decodable
+import protocol Decodable.Decodable
 
 class Stop: Object {
     fileprivate dynamic var latitudeInternal = 0.0

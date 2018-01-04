@@ -12,7 +12,7 @@ import UIKit
 class ManageDestinationsViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
-    let dataSource = Data.objects(ofType: Route.self).sorted(byProperty: "id")
+    let dataSource = Data.objects(ofType: Route.self).sorted(byKeyPath: "id")
    
     override func viewDidLoad() {
         title = "Nearby Routes"

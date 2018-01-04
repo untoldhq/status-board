@@ -26,7 +26,7 @@ class TrimetMapViewController: UIViewController {
         mapView.region = mapView.regionThatFits(MKCoordinateRegionMakeWithDistance(region.center, region.radius * 2, region.radius * 2))
         mapView.delegate = self
         
-        notificationToken = unfilteredDataSource.addNotificationBlock { [weak self] changes in
+        notificationToken = unfilteredDataSource.observe { [weak self] changes in
             guard let mapView = self?.mapView else {
                 return
             }
