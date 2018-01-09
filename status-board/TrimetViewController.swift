@@ -15,7 +15,7 @@ class TrimetViewController: UIViewController {
     let numberOfSections = 1
 
     lazy var dataSource: Results<WatchedDestination>! = {
-        return Data.objects(ofType: WatchedDestination.self)
+        return Data.objects(inContext: Data.context(), ofType: WatchedDestination.self)
     }()
     
     var notificationToken: NotificationToken? = nil
@@ -24,7 +24,6 @@ class TrimetViewController: UIViewController {
         super.viewDidLoad()
         collectionView.contentInset = UIEdgeInsets(top: -60, left: 0, bottom: 0, right: 0)
         edgesForExtendedLayout = UIRectEdge(rawValue: 0)
-        automaticallyAdjustsScrollViewInsets = false
         let layout = collectionView.collectionViewLayout as! DestinationLayout
         layout.register(DestinationDecorationView.self, forDecorationViewOfKind: "signage")
         

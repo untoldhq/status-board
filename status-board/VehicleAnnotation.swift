@@ -19,8 +19,9 @@ class VehicleAnnotation: MKPointAnnotation {
 
 class VehicleAnnotationView: MKAnnotationView {
     var labelText = ""
-    var routeType: Route.RouteType!
-
+    var routeType: Route.RouteType?
+    var routeColor: UIColor?
+    
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         isOpaque = false
@@ -33,13 +34,35 @@ class VehicleAnnotationView: MKAnnotationView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
+        
+        if routeType == .lightRail {
+            let context: CGContext = UIGraphicsGetCurrentContext()!
+            
+            let arrowPath = CGMutablePath()
+            arrowPath.move(to: CGPoint(x: 20, y: 30))
+            arrowPath.addLine(to: CGPoint(x: 36, y: 20))
+            arrowPath.addLine(to: CGPoint(x: 20, y: 10))
+//            arrowPath.addLine(to: CGPoint(x: 20, y: 14))
+            arrowPath.addArc(center: CGPoint(x: 20, y: 20), radius: 10, startAngle: 3 * .pi / 2, endAngle: .pi / 2, clockwise: true)
+            arrowPath.closeSubpath()
+            context.addPath(arrowPath)
+            context.setStrokeColor(UIColor.black.cgColor)
+            context.setLineWidth(1)
+            context.setFillColor((routeColor ?? UIColor.black).cgColor)
+            context.drawPath(using: .fillStroke)
+
+
+            
+            
+            return
+        }
         let string = labelText as NSString
         let attributes = [
-            NSForegroundColorAttributeName: Style.color(.highlightedText),
-            NSFontAttributeName: Style.font(.body)
+            NSAttributedStringKey.foregroundColor: Style.color(.highlightedText),
+            NSAttributedStringKey.font: Style.font(.body)
         ]
 
-        var size = string.size(attributes: attributes)
+        var size = string.size(withAttributes: attributes)
         size = CGSize(width: size.width + 4, height: size.height + 4)
         let rect = CGRect(
         x: (bounds.width - size.width) / 2,

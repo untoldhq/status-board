@@ -12,10 +12,10 @@ import Decodable
 import protocol Decodable.Decodable
 
 class WatchedDestination: Object {
-    fileprivate dynamic var routeInternal: Route?
-    fileprivate dynamic var stopInternal: Stop?
-    dynamic var id = UUID().uuidString
-    dynamic var nextArrival: Date? = nil
+    @objc fileprivate dynamic var routeInternal: Route?
+    @objc fileprivate dynamic var stopInternal: Stop?
+    @objc dynamic var id = UUID().uuidString
+    @objc dynamic var nextArrival: Date? = nil
     
     static var timer: Timer? = nil
     
@@ -32,11 +32,11 @@ class WatchedDestination: Object {
         timer?.fire()
     }
     
-    static func tick() {
-        guard Data.objects(ofType: self).count > 0 else {
+    @objc static func tick() {
+        guard Data.objects(inContext: Data.context(), ofType: self).count > 0 else {
             return
         }
-        let stopIds = Data.objects(ofType: self).map { String($0.stop.id) }
+        let stopIds = Data.objects(inContext: Data.context(), ofType: self).map { String($0.stop.id) }
         let stops = stopIds.joined(separator: ",")
         API.manager.request(.arrivals(parameters: ["locIDs": stops])) { result in
             switch result {
@@ -49,13 +49,13 @@ class WatchedDestination: Object {
     }
     
     static func parse(_ json: Any) {
-        Data.write {
+        Data.write(inContext: Data.context()) {
             do {
                 let array = try json => "resultSet" => "arrival"
                 let arrivals = try [Arrival].decode(array)
                 for arrival in arrivals {
-                    if let route = Data.object(ofType: Route.self, forPrimaryKey: arrival.routeId),
-                        let stop = Data.object(ofType: Stop.self, forPrimaryKey: arrival.stopId),
+                    if let route = Data.object(inContext: Data.context(), ofType: Route.self, forPrimaryKey: arrival.routeId),
+                        let stop = Data.object(inContext: Data.context(), ofType: Stop.self, forPrimaryKey: arrival.stopId),
                         let destination = self.destinationForRoute(route, stop: stop),
                         let arrival = arrival.arrivalTime {
                         destination.nextArrival = arrival
@@ -73,26 +73,26 @@ class WatchedDestination: Object {
     }
     
     static func destinationForRoute(_ route: Route, stop: Stop) -> WatchedDestination? {
-        return Data.objects(ofType: self).filter { $0.route == route && $0.stop == stop }.first
+        return Data.objects(inContext: Data.context(), ofType: self).filter { $0.route == route && $0.stop == stop }.first
     }
     
     static func destinationsForRoute(_ route: Route) -> [WatchedDestination] {
-        return Data.objects(ofType: self).filter { $0.route == route }
+        return Data.objects(inContext: Data.context(), ofType: self).filter { $0.route == route }
     }
     
     static func watch(_ route: Route, stop: Stop) {
         let destination = WatchedDestination()
         destination.routeInternal = route
         destination.stopInternal = stop
-        Data.write {
-            Data.add(destination)
+        Data.write(inContext: Data.context()) {
+            Data.add(inContext: Data.context(), destination)
         }
     }
     
     static func unWatch(_ route: Route, stop: Stop) {
         if let destination = destinationForRoute(route, stop: stop) {
-            Data.write {
-                Data.delete(destination)
+            Data.write(inContext: Data.context()) {
+                Data.delete(inContext: Data.context(), destination)
             }
         }
     }

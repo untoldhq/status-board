@@ -13,14 +13,14 @@ import protocol Decodable.Decodable
 import CoreLocation
 
 class Vehicle: Object {
-    fileprivate dynamic var latitudeInternal = 0.0
-    fileprivate dynamic var longitudeInternal = 0.0
-    fileprivate dynamic var previousLatitudeInternal = 0.0
-    fileprivate dynamic var previousLongitudeInternal = 0.0
-    dynamic var id = 0
-    dynamic var name = ""
-    dynamic var bearing: CGFloat = 0.0
-    dynamic var routeId = 0
+    @objc fileprivate dynamic var latitudeInternal = 0.0
+    @objc fileprivate dynamic var longitudeInternal = 0.0
+    @objc fileprivate dynamic var previousLatitudeInternal = 0.0
+    @objc fileprivate dynamic var previousLongitudeInternal = 0.0
+    @objc dynamic var id = 0
+    @objc dynamic var name = ""
+    @objc dynamic var bearing: CGFloat = 0.0
+    @objc dynamic var routeId = 0
     
     static var timer: Timer? = nil
     static let pollingInterval = 5.0
@@ -44,7 +44,7 @@ class Vehicle: Object {
     }
     
     var route: Route? {
-        return Data.object(ofType: Route.self, forPrimaryKey: routeId)
+        return Data.object(inContext: Data.context(), ofType: Route.self, forPrimaryKey: routeId)
     }
     
     var previousLocation: CLLocationCoordinate2D {
@@ -62,11 +62,11 @@ class Vehicle: Object {
         timer?.fire()
     }
     
-    static func tick() {
-        guard Data.objects(ofType: WatchedDestination.self).count > 0 else {
+    @objc static func tick() {
+        guard Data.objects(inContext: Data.context(), ofType: WatchedDestination.self).count > 0 else {
             return
         }
-        let routeIds = Data.objects(ofType: WatchedDestination.self).map { String($0.route.id) }
+        let routeIds = Data.objects(inContext: Data.context(), ofType: WatchedDestination.self).map { String($0.route.id) }
         let routes = routeIds.joined(separator: ",")
         API.manager.request(.vehicles(parameters: ["routes": routes])) { result in
             switch result {
@@ -79,7 +79,7 @@ class Vehicle: Object {
     }
     
     static func parse(_ json: Any) {
-        Data.write {
+        Data.write(inContext: Data.context()) {
             do {
                 let array = try json => "resultSet" => "vehicle"
                 _ = try [Vehicle].decode(array)
@@ -93,10 +93,11 @@ class Vehicle: Object {
 
 extension Vehicle: Decodable {
     static func decode(_ json: Any) throws -> Self {
-        let vehicle = Data.guaranteedObject(ofType: self, forPrimaryKey: try json => "vehicleID")
+        let vehicle = Data.guaranteedObject(inContext: Data.context(), ofType: self, forPrimaryKey: try json => "vehicleID")
         vehicle.previousLocation = vehicle.location
         vehicle.location = CLLocationCoordinate2D(latitude: try json => "latitude", longitude: try json => "longitude")
-        vehicle.name = try json => "signMessage"
+        let name: String? = try json =>? "signMessage"
+        vehicle.name = name ?? "Unknown Vehicle"
         vehicle.routeId = try json => "routeNumber"
         let bearing: Double = try json => "bearing"
         vehicle.bearing = CGFloat(bearing)

@@ -13,11 +13,11 @@ import Decodable
 import protocol Decodable.Decodable
 
 class Stop: Object {
-    fileprivate dynamic var latitudeInternal = 0.0
-    fileprivate dynamic var longitudeInternal = 0.0
-    dynamic var directionality = ""
-    dynamic var id = 0
-    dynamic var name = ""
+    @objc fileprivate dynamic var latitudeInternal = 0.0
+    @objc fileprivate dynamic var longitudeInternal = 0.0
+    @objc dynamic var directionality = ""
+    @objc dynamic var id = 0
+    @objc dynamic var name = ""
     let routes = List<Route>()
     
     override static func primaryKey() -> String {
@@ -50,7 +50,7 @@ class Stop: Object {
     }
     
     static func parse(_ json: Any) {
-        Data.write {
+        Data.write(inContext: Data.context()) {
             do {
                 let array = try json => "resultSet" => "location"
                 _ = try [Stop].decode(array)
@@ -66,7 +66,7 @@ class Stop: Object {
 extension Stop: Decodable {
     
     static func decode(_ json: Any) throws -> Self {
-        let stop = Data.guaranteedObject(ofType: self, forPrimaryKey: try json => "locid")
+        let stop = Data.guaranteedObject(inContext: Data.context(), ofType: self, forPrimaryKey: try json => "locid")
         stop.directionality = try json => "dir"
         stop.location = CLLocationCoordinate2D(latitude: try json => "lat", longitude: try json => "lng")
         stop.name = try json => "desc"

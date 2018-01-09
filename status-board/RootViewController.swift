@@ -13,6 +13,5 @@ class RootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         edgesForExtendedLayout = UIRectEdge(rawValue: 0)
-        automaticallyAdjustsScrollViewInsets = false
     }
 }

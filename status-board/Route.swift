@@ -18,9 +18,9 @@ class Route: Object {
         case lightRail
     }
     
-    dynamic var id = 0
-    dynamic var name = ""
-    fileprivate dynamic var routeTypeInternal = 0
+    @objc dynamic var id = 0
+    @objc dynamic var name = ""
+    @objc fileprivate dynamic var routeTypeInternal = 0
     let stops = List<Stop>()
     
     override static func primaryKey() -> String {
@@ -64,6 +64,23 @@ class Route: Object {
         }
     }
     
+    var color: UIColor {
+        switch id {
+        case 90:
+            return MaxRouteLine.trimetRed
+        case 100:
+            return MaxRouteLine.trimetBlue
+        case 190:
+            return MaxRouteLine.trimetYellow
+        case 200:
+            return MaxRouteLine.trimetGreen
+        case 290:
+            return MaxRouteLine.trimetOrange
+        default:
+            return UIColor.black
+        }
+    }
+    
     func connectStop(_ stop: Stop) {
         if !stops.contains(stop) {
             stops.append(stop)
@@ -76,7 +93,7 @@ class Route: Object {
 
 extension Route: Decodable {
     static func decode(_ json: Any) throws -> Self {
-        let route = Data.guaranteedObject(ofType: self, forPrimaryKey: try json => "route")
+        let route = Data.guaranteedObject(inContext: Data.context(), ofType: self, forPrimaryKey: try json => "route")
         let routeTypeCode: String = try json => "type"
         if routeTypeCode == "B" {
             route.routeType = .bus

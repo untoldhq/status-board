@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Stop.fetch()
         WatchedDestination.startWatching()
         Vehicle.startWatching()
+        MaxRouteLine.fetchMaxRouteLines()
         return true
     }
 

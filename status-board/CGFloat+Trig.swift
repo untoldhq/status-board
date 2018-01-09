@@ -12,10 +12,10 @@ import UIKit
 extension CGFloat {
     
     func toRadians() -> CGFloat {
-        return self * CGFloat(M_PI) / 180
+        return self * CGFloat(Float.pi) / 180
     }
     func toDegrees() -> CGFloat {
-        return self * 180 / CGFloat(M_PI)
+        return self * 180 / CGFloat(Float.pi)
     }
     
 }

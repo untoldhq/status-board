@@ -65,7 +65,7 @@ struct API {
     
     let base = "https://developer.trimet.org/ws/"
     fileprivate let token = AppDelegate.keys.trimetAPIKey()!
-    
+    static let maxKMLEndpoint = "https://developer.trimet.org/gis/data/tm_rail_lines.kml"
     
     func request(_ endpoint: API.Endpoint, completionHandler:@escaping (Result<Any>)->()) {
         Alamofire.request(endpoint.url(), parameters: endpoint.parameters()).responseJSON { response in
