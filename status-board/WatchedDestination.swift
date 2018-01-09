@@ -52,13 +52,23 @@ class WatchedDestination: Object {
         Data.write(inContext: Data.context()) {
             do {
                 let array = try json => "resultSet" => "arrival"
-                let arrivals = try [Arrival].decode(array)
+                var arrivals = try [Arrival].decode(array)
+                arrivals = arrivals.flatMap { $0.arrivalTime != nil ? $0 : nil } // filter out arrivals with no arrival time
+                arrivals = arrivals.filter { arrival in
+                    let otherStopArrivals: [Arrival] = arrivals.filter { $0.routeId == arrival.routeId && $0.stopId == arrival.stopId && arrival.arrivalTime != $0.arrivalTime }
+                    let soonestOtherArrival = otherStopArrivals.min {
+                         $0.arrivalTime! < $1.arrivalTime!
+                    }
+                    if let soonest = soonestOtherArrival {
+                        return arrival.arrivalTime! < soonest.arrivalTime!
+                    }
+                    return true // no other arrival times, so this one is the soonest.
+                }
                 for arrival in arrivals {
                     if let route = Data.object(inContext: Data.context(), ofType: Route.self, forPrimaryKey: arrival.routeId),
                         let stop = Data.object(inContext: Data.context(), ofType: Stop.self, forPrimaryKey: arrival.stopId),
-                        let destination = self.destinationForRoute(route, stop: stop),
-                        let arrival = arrival.arrivalTime {
-                        destination.nextArrival = arrival
+                        let destination = self.destinationForRoute(route, stop: stop){
+                        destination.nextArrival = arrival.arrivalTime
                     }
                 }
             }
@@ -106,7 +116,7 @@ struct Arrival {
 
     let routeId: Int
     let stopId: Int
-    let arrivalTime: Date?
+    let arrivalTime: Date! // I hate this, but this is working around a shortcoming in Decodable (can't partially fail an array initializer)
 }
 
 extension Arrival: Decodable {

@@ -73,7 +73,7 @@ class TrimetViewController: UIViewController {
                 cell.timeLabel.text = "\(Int(difference / 60))m"
             }
             else {
-                cell.timeLabel.text = "Unknown"
+                cell.timeLabel.text = "Due"
             }
             cell.directionLabel.text = destination.stop.directionality
             cell.vehicleImageView.image = destination.route.routeType == .bus ? UIImage(named: "bus") : UIImage(named: "rail")
