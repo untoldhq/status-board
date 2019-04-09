@@ -21,7 +21,6 @@
 		180A8E191D8DE3A40023DEF7 /* CGFloat+Trig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E181D8DE3A40023DEF7 /* CGFloat+Trig.swift */; };
 		180A8E1C1D8DEF4C0023DEF7 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A8E1B1D8DEF4C0023DEF7 /* Style.swift */; };
 		180EF5362000159E0008DE30 /* MaxRouteLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180EF5352000159E0008DE30 /* MaxRouteLine.swift */; };
-		180EF538200024B20008DE30 /* EnumExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180EF537200024B20008DE30 /* EnumExtensions.swift */; };
 		181E25231D8F22D6005A938A /* DestinationDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E25221D8F22D6005A938A /* DestinationDecorationView.swift */; };
 		181E25251D8F2349005A938A /* DestinationLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E25241D8F2349005A938A /* DestinationLayout.swift */; };
 		181E25301D8F3653005A938A /* Overpass-Bold-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181E25261D8F2C0E005A938A /* Overpass-Bold-Italic.ttf */; };
@@ -32,6 +31,7 @@
 		181E25351D8F3653005A938A /* Overpass-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181E252B1D8F2C0E005A938A /* Overpass-Light.ttf */; };
 		181E25361D8F3653005A938A /* Overpass-Regular-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181E252C1D8F2C0E005A938A /* Overpass-Regular-Italic.ttf */; };
 		181E25371D8F3653005A938A /* Overpass-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 181E252D1D8F2C0E005A938A /* Overpass-Regular.ttf */; };
+		182CAC352259213300A2FC31 /* tm_rail_lines.kml in Resources */ = {isa = PBXBuildFile; fileRef = 182CAC342259213300A2FC31 /* tm_rail_lines.kml */; };
 		1837A9831D7FC062000ED091 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9821D7FC062000ED091 /* AppDelegate.swift */; };
 		1837A9851D7FC062000ED091 /* TrimetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9841D7FC062000ED091 /* TrimetViewController.swift */; };
 		1837A9881D7FC062000ED091 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1837A9861D7FC062000ED091 /* Main.storyboard */; };
@@ -57,7 +57,6 @@
 		180A8E181D8DE3A40023DEF7 /* CGFloat+Trig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Trig.swift"; sourceTree = "<group>"; };
 		180A8E1B1D8DEF4C0023DEF7 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		180EF5352000159E0008DE30 /* MaxRouteLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxRouteLine.swift; sourceTree = "<group>"; };
-		180EF537200024B20008DE30 /* EnumExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumExtensions.swift; sourceTree = "<group>"; };
 		181E25221D8F22D6005A938A /* DestinationDecorationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationDecorationView.swift; sourceTree = "<group>"; };
 		181E25241D8F2349005A938A /* DestinationLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationLayout.swift; sourceTree = "<group>"; };
 		181E25261D8F2C0E005A938A /* Overpass-Bold-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Overpass-Bold-Italic.ttf"; sourceTree = "<group>"; };
@@ -68,6 +67,7 @@
 		181E252B1D8F2C0E005A938A /* Overpass-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Overpass-Light.ttf"; sourceTree = "<group>"; };
 		181E252C1D8F2C0E005A938A /* Overpass-Regular-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Overpass-Regular-Italic.ttf"; sourceTree = "<group>"; };
 		181E252D1D8F2C0E005A938A /* Overpass-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Overpass-Regular.ttf"; sourceTree = "<group>"; };
+		182CAC342259213300A2FC31 /* tm_rail_lines.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = tm_rail_lines.kml; sourceTree = "<group>"; };
 		1837A97F1D7FC062000ED091 /* status-board.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "status-board.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1837A9821D7FC062000ED091 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1837A9841D7FC062000ED091 /* TrimetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimetViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +97,7 @@
 		180A8DFE1D8C73AC0023DEF7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				182CAC362259213E00A2FC31 /* Data */,
 				180A8DFC1D8C73A50023DEF7 /* Route.swift */,
 				180EF5352000159E0008DE30 /* MaxRouteLine.swift */,
 				180A8E011D8CB2890023DEF7 /* WatchedDestination.swift */,
@@ -144,7 +145,6 @@
 		180A8E1A1D8DE3A80023DEF7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				180EF537200024B20008DE30 /* EnumExtensions.swift */,
 				180A8E181D8DE3A40023DEF7 /* CGFloat+Trig.swift */,
 			);
 			name = Extensions;
@@ -171,6 +171,14 @@
 				181E252D1D8F2C0E005A938A /* Overpass-Regular.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		182CAC362259213E00A2FC31 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				182CAC342259213300A2FC31 /* tm_rail_lines.kml */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 		1837A9761D7FC062000ED091 = {
@@ -293,6 +301,7 @@
 				181E25321D8F3653005A938A /* Overpass-ExtraLight Italic.ttf in Resources */,
 				181E25331D8F3653005A938A /* Overpass-ExtraLight.ttf in Resources */,
 				181E25341D8F3653005A938A /* Overpass-Light-Italic.ttf in Resources */,
+				182CAC352259213300A2FC31 /* tm_rail_lines.kml in Resources */,
 				181E25351D8F3653005A938A /* Overpass-Light.ttf in Resources */,
 				181E25361D8F3653005A938A /* Overpass-Regular-Italic.ttf in Resources */,
 				181E25371D8F3653005A938A /* Overpass-Regular.ttf in Resources */,
@@ -372,7 +381,6 @@
 				180A8E0E1D8DC3480023DEF7 /* Vehicle.swift in Sources */,
 				181E25251D8F2349005A938A /* DestinationLayout.swift in Sources */,
 				180A8E021D8CB2890023DEF7 /* WatchedDestination.swift in Sources */,
-				180EF538200024B20008DE30 /* EnumExtensions.swift in Sources */,
 				180A8E1C1D8DEF4C0023DEF7 /* Style.swift in Sources */,
 				180EF5362000159E0008DE30 /* MaxRouteLine.swift in Sources */,
 				188025D52003EA2200F621FE /* RoutePolyline.swift in Sources */,

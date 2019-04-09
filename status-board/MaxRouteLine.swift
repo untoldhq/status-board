@@ -80,7 +80,7 @@ class MaxRouteLine: Object {
     }
     
     class func fetchMaxRouteLines() {
-        Alamofire.request(API.maxKMLEndpoint).responseData { response in
+        Alamofire.request(API.maxKMLEndpoint).validate(statusCode: [200]).responseData { response in
             switch response.result {
             case .success:
                 if let data = response.result.value {
@@ -91,7 +91,14 @@ class MaxRouteLine: Object {
                     
                 }
             case .failure(let error):
-                print("failed to parse XML \(error)")
+                print("failed to load XML \(error)")
+                DispatchQueue(label: "parser").async {
+                    // this was dumb as hell, why on earth did I name my class Data?!
+                    let data = try! Foundation.Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "tm_rail_lines", ofType: "kml")!))
+                    let xml: XMLIndexer = SWXMLHash.lazy(data)
+                    parseLines(xml)
+                }
+
             }
         }
     }
@@ -135,7 +142,7 @@ class MaxRouteLine: Object {
     }
 }
 
-enum MaxLine: Int, EnumCollection {
+enum MaxLine: Int, CaseIterable {
     case blue
     case green
     case yellow
@@ -150,7 +157,7 @@ enum MaxLine: Int, EnumCollection {
     case orangeALoopBLoop
     
     static var lines: [String] {
-        return allValues.map {
+        return allCases.map {
             $0.stringValue
         }
     }
@@ -185,7 +192,7 @@ enum MaxLine: Int, EnumCollection {
     }
     
     static func forString(string: String) -> MaxLine? {
-        return allValues.filter {
+        return allCases.filter {
             $0.stringValue == string
         }.first
     }
