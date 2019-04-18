@@ -40,6 +40,7 @@
 		1837A9941D7FC331000ED091 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837A9931D7FC330000ED091 /* API.swift */; };
 		188025D52003EA2200F621FE /* RoutePolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188025D42003EA2200F621FE /* RoutePolyline.swift */; };
 		31A30D2E460AAA585A719955 /* Pods_status_board.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75FE7C4D88DA3B367C94CFE1 /* Pods_status_board.framework */; };
+		36DC28842267F4C7002C5568 /* HeadquartersAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DC28832267F4C7002C5568 /* HeadquartersAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		1837A9911D7FC28C000ED091 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1837A9931D7FC330000ED091 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		188025D42003EA2200F621FE /* RoutePolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutePolyline.swift; sourceTree = "<group>"; };
+		36DC28832267F4C7002C5568 /* HeadquartersAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadquartersAnnotation.swift; sourceTree = "<group>"; };
 		75FE7C4D88DA3B367C94CFE1 /* Pods_status_board.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_status_board.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D339B6B0DA03295943280380 /* Pods-status-board.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-status-board.release.xcconfig"; path = "Pods/Target Support Files/Pods-status-board/Pods-status-board.release.xcconfig"; sourceTree = "<group>"; };
 		DEFBBD637EA586C170FECE24 /* Pods-status-board.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-status-board.debug.xcconfig"; path = "Pods/Target Support Files/Pods-status-board/Pods-status-board.debug.xcconfig"; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				182CAC362259213E00A2FC31 /* Data */,
 				180A8DFC1D8C73A50023DEF7 /* Route.swift */,
+				188025D42003EA2200F621FE /* RoutePolyline.swift */,
 				180EF5352000159E0008DE30 /* MaxRouteLine.swift */,
 				180A8E011D8CB2890023DEF7 /* WatchedDestination.swift */,
 				180A8DFF1D8C75D30023DEF7 /* Stop.swift */,
@@ -112,7 +115,6 @@
 			children = (
 				180A8E0F1D8DCD1C0023DEF7 /* RootViewController.swift */,
 				180A8E111D8DCE6F0023DEF7 /* TrimetMapViewController.swift */,
-				188025D42003EA2200F621FE /* RoutePolyline.swift */,
 				1837A9841D7FC062000ED091 /* TrimetViewController.swift */,
 				180A8E041D8CB8AC0023DEF7 /* ManageDestinationsViewController.swift */,
 				180A8E061D8CBFC60023DEF7 /* ManageDestinationsDetailViewController.swift */,
@@ -128,6 +130,7 @@
 				180A8E081D8CD2460023DEF7 /* TrimetDestinationCell.swift */,
 				181E25221D8F22D6005A938A /* DestinationDecorationView.swift */,
 				181E25241D8F2349005A938A /* DestinationLayout.swift */,
+				36DC28832267F4C7002C5568 /* HeadquartersAnnotation.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				180A8E001D8C75D30023DEF7 /* Stop.swift in Sources */,
 				181E25231D8F22D6005A938A /* DestinationDecorationView.swift in Sources */,
 				180A8E051D8CB8AC0023DEF7 /* ManageDestinationsViewController.swift in Sources */,
+				36DC28842267F4C7002C5568 /* HeadquartersAnnotation.swift in Sources */,
 				180A8E0E1D8DC3480023DEF7 /* Vehicle.swift in Sources */,
 				181E25251D8F2349005A938A /* DestinationLayout.swift in Sources */,
 				180A8E021D8CB2890023DEF7 /* WatchedDestination.swift in Sources */,

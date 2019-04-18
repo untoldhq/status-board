@@ -11,9 +11,9 @@ import CoreLocation
 
 struct Location {
     static let manager = Location()
-    let location = CLLocationCoordinate2D(latitude: 45.5202644, longitude: -122.6744711)
+    static let headquartersLocation = CLLocationCoordinate2D(latitude: 45.520171, longitude: -122.671580)
     let region : CLCircularRegion
     init() {
-        region = CLCircularRegion(center: location, radius: 804.67, identifier: "defaultMapRegion") // one half mile = 804.67 meters
+        region = CLCircularRegion(center: Location.headquartersLocation, radius: 804.67, identifier: "defaultMapRegion") // one half mile = 804.67 meters
     }
 }

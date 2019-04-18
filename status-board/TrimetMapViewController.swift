@@ -30,6 +30,11 @@ class TrimetMapViewController: UIViewController {
         let region = Location.manager.region
         mapView.region = mapView.regionThatFits(MKCoordinateRegionMakeWithDistance(region.center, region.radius * 2, region.radius * 2))
         mapView.delegate = self
+
+        //add location logo
+        let hqAnnotation = HeadquartersAnnotation()
+        hqAnnotation.coordinate = Location.headquartersLocation
+        mapView.addAnnotation(hqAnnotation)
         
         notificationToken = unfilteredDataSource.observe { [weak self] changes in
             guard self?.mapView != nil else {
@@ -132,6 +137,15 @@ extension TrimetMapViewController: MKMapViewDelegate {
                     return nil
                 }
                 annotationView.tag = vehicle.id
+            }
+            return annotationView
+        case let headquartersAnnotation as HeadquartersAnnotation:
+            let annotationView: HeadquartersAnnotationView
+            if let existing = mapView.dequeueReusableAnnotationView(withIdentifier: "headquartersAnnotation") as? HeadquartersAnnotationView {
+                annotationView = existing
+            }
+            else {
+                annotationView = HeadquartersAnnotationView(annotation: headquartersAnnotation, reuseIdentifier: "headquartersAnnotation")
             }
             return annotationView
         default:
