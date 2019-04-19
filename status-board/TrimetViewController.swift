@@ -23,6 +23,7 @@ class TrimetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.contentInset = UIEdgeInsets(top: -60, left: 0, bottom: 0, right: 0)
+        collectionView.backgroundColor = Style.color(.dark)
         edgesForExtendedLayout = UIRectEdge(rawValue: 0)
         let layout = collectionView.collectionViewLayout as! DestinationLayout
         layout.register(DestinationDecorationView.self, forDecorationViewOfKind: "signage")

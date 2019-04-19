@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13771" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4EE-bg-Jvl">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="14313.18" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4EE-bg-Jvl">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
         <deployment identifier="tvOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Overpass-Bold.ttf">
-            <string>Overpass-Bold</string>
-        </array>
-        <array key="Overpass-Light.ttf">
-            <string>Overpass-Light</string>
-        </array>
-        <array key="Overpass-Regular.ttf">
-            <string>Overpass-Reg</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Root View Controller-->
         <scene sceneID="9yU-fl-oyd">
@@ -84,7 +73,6 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zfp-du-kcN">
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="540"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="B8D-FF-HNK" customClass="DestinationLayout" customModule="status_board" customModuleProvider="target"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="ldI-62-0Mt" customClass="TrimetDestinationCell" customModule="status_board" customModuleProvider="target">
@@ -240,7 +228,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="540" height="520"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="eNx-8B-YvN" detailTextLabel="evp-QA-jof" style="IBUITableViewCellStyleSubtitle" id="oAN-ic-JBD">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="eNx-8B-YvN" detailTextLabel="evp-QA-jof" style="IBUITableViewCellStyleSubtitle" id="oAN-ic-JBD">
                                         <rect key="frame" x="0.0" y="40" width="540" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oAN-ic-JBD" id="xfo-ir-pCw">
@@ -305,7 +293,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="540" height="520"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="9zY-Yo-okM" detailTextLabel="7NK-yU-1iB" style="IBUITableViewCellStyleSubtitle" id="lF0-XW-6n8">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="9zY-Yo-okM" detailTextLabel="7NK-yU-1iB" style="IBUITableViewCellStyleSubtitle" id="lF0-XW-6n8">
                                         <rect key="frame" x="0.0" y="40" width="540" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lF0-XW-6n8" id="NRU-tX-IEq">
